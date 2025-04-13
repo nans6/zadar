@@ -5,6 +5,7 @@ import models.renewables_model as renewables_model
 # import models.load_forecast_model as load_model
 import models.price_risk_model as risk_model  # Add price risk model import
 import agent_reasoner  # Add the new import
+import pandas as pd
 # import strategy_engine
 
 from pprint import pprint
@@ -60,7 +61,6 @@ def run_agent_cycle():
     else:
          print("Warning: No detailed forecast found in weather data to calculate renewable metrics.")
 
-
     # --- Placeholders for other models ---
     print("\nPredicting load (Placeholder)...")
     # load_prediction = load_model.predict_load(weather_data)
@@ -68,7 +68,6 @@ def run_agent_cycle():
     print(load_prediction)
 
     print("\nAssessing price risk...")
-    # Replace placeholder with actual price risk assessment
     price_risk = risk_model.assess_price_risk(
         load_prediction=load_prediction,
         renewable_metrics=renewable_metrics,
@@ -76,7 +75,23 @@ def run_agent_cycle():
     )
     print("\nPrice Risk Assessment:")
     pprint(price_risk)
-    # --- End Placeholders ---
+
+    # --- Load Market Data from CSV ---
+    print("\nLoading market data from CSV...")
+    try:
+        market_data = pd.read_csv('data/synthetic_market_data.csv').to_dict(orient='records')[0]  # Get first scenario by default
+        # If we have risk metrics, try to find the most appropriate scenario
+        if price_risk and 'price_spike_probability' in price_risk:
+            risk_level = price_risk['price_spike_probability']
+            df = pd.read_csv('data/synthetic_market_data.csv')
+            # Find the scenario with the closest risk level
+            closest_scenario = df.iloc[(df['risk_level'] - risk_level).abs().argsort()[:1]]
+            market_data = closest_scenario.to_dict(orient='records')[0]
+        print("\nMarket Data (from CSV):")
+        pprint(market_data)
+    except Exception as e:
+        print(f"Warning: Could not load market data from CSV: {e}")
+        market_data = {}
 
     # --- Create Input Dictionary for LLM ---
     llm_input_data = {
@@ -84,25 +99,17 @@ def run_agent_cycle():
         "renewable_metrics": renewable_metrics,
         "eia_realtime_data": eia_realtime_data if eia_realtime_data else {},
         "load_prediction": load_prediction,
-        "price_risk": price_risk
+        "price_risk": price_risk,
+        "market_prices": market_data
     }
     print("\n--- Data Sent to LLM ---")
     pprint(llm_input_data)
-    print("------------------------")
 
-    # --- 3. Reasoning - Call LLM via Replicate ---
-    print("\nGenerating strategy with Replicate LLM...")
-    strategy_recommendation_text = agent_reasoner.generate_strategy_via_replicate(llm_input_data)
+    # --- Generate Strategy via LLM ---
+    print("\n--- Generating Strategy ---")
+    strategy = agent_reasoner.generate_strategy_via_replicate(llm_input_data)
+    print("\nStrategy:")
+    print(strategy)
 
-    print(f"\n--- Raw LLM Output ---")
-    print(strategy_recommendation_text)
-    print("----------------------")
-
-    # --- 4. Action - Format/Output Strategy (Placeholder) ---
-    print("\nFormatting final strategy (Placeholder)...")
-    print("\n--- Agent Recommendation ---")
-    print(strategy_recommendation_text)
-    print("---------------------------\n")
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     run_agent_cycle()

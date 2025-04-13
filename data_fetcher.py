@@ -239,42 +239,29 @@ def get_weather_forecast() -> Dict[str, Any]:
         return {"error": f"Failed to fetch weather data: {str(e)}"}
 
 if __name__ == "__main__":
-    from pprint import pprint
-    
-    print("\nTesting Weather Forecast:")
-    print("------------------------")
-    weather_forecast = get_weather_forecast()
-    if "error" in weather_forecast:
-        print(f"Error: {weather_forecast['error']}")
-    else:
-        print(f"\nLocation: {weather_forecast['city']}, {weather_forecast['country']}")
-        print("\nDaily Summaries:")
-        for date, summary in weather_forecast["daily_summaries"].items():
+    # Test weather forecast
+    print("\nTesting weather forecast...")
+    weather_data = get_weather_forecast()
+    if "error" not in weather_data:
+        print(f"\nForecast for {weather_data['city']}, {weather_data['country']}")
+        for date, summary in weather_data["daily_summaries"].items():
             print(f"\n{date}:")
-            print(f"  Temperature: {summary['min_temp']}°C to {summary['max_temp']}°C (avg: {summary['avg_temp']}°C)")
+            print(f"  Temperature: {summary['min_temp']}°C to {summary['max_temp']}°C")
             print(f"  Wind: {summary['avg_wind']} m/s")
-            print(f"  Humidity: {summary['avg_humidity']}%")
-            print(f"  Solar Potential: {summary['solar_potential_hours']} hours")
-            if summary['storm_hours']: print(f"  Storm Risk: {summary['storm_hours']} hours")
-            if summary['extreme_heat_hours']: print(f"  Extreme Heat: {summary['extreme_heat_hours']} hours")
-    
-    print("\nTesting EIA Grid Data:")
-    print("---------------------")
-    eia_data = get_eia_realtime_grid_data(hours_back=24)
+            print(f"  Storm Hours: {summary['storm_hours']}")
+            print(f"  Solar Potential Hours: {summary['solar_potential_hours']}")
+    else:
+        print(f"Error: {weather_data['error']}")
+
+    # Test EIA data fetch
+    print("\nTesting EIA data fetch...")
+    eia_data = get_eia_realtime_grid_data("TEX")
     if eia_data:
-        print("\nCurrent Values:")
+        print("\nCurrent Grid Status:")
         current = eia_data["current"]
         print(f"Timestamp: {current['timestamp_iso']}")
         print(f"Demand: {current['demand_mw']} MW")
         print(f"Wind: {current['wind_mw']} MW")
         print(f"Solar: {current['solar_mw']} MW")
-        
-        print("\nLast 24 Hour Statistics:")
-        stats = eia_data["statistics"]
-        print(f"Maximum Demand: {stats['max_demand']} MW")
-        print(f"Minimum Demand: {stats['min_demand']} MW")
-        print(f"Average Demand: {stats['avg_demand']} MW")
-        if stats['max_wind']: print(f"Peak Wind: {stats['max_wind']} MW")
-        if stats['max_solar']: print(f"Peak Solar: {stats['max_solar']} MW")
     else:
-        print("Failed to fetch EIA data")
+        print("Error: Could not retrieve EIA data")
