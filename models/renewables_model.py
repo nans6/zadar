@@ -1,7 +1,7 @@
 import statistics
 from datetime import datetime
 
-# --- Configuration / Heuristics ---
+# Configuration / Heuristics
 NORMAL_WIND_CF = 0.35  # Typical average capacity factor for ERCOT wind
 NORMAL_SOLAR_CF = 0.25 # Typical average capacity factor for ERCOT solar (daytime average)
 
@@ -15,7 +15,7 @@ SOLAR_CLOUDY_CF = 0.4
 SOLAR_STORM_CF = 0.1
 DAY_START_HOUR = 6 # Simplified UTC hour check
 DAY_END_HOUR = 20  # Simplified UTC hour check
-# --- End Configuration ---
+
 
 def estimate_wind_capacity_factor(wind_speed: float) -> float:
     """Estimates wind turbine capacity factor based on wind speed."""
@@ -103,7 +103,6 @@ def calculate_renewable_metrics(forecasts: list) -> dict:
         "detailed_estimates": detailed_estimates 
     }
 
-# Optional: Add the __main__ block for testing within this file
 if __name__ == '__main__':
     dummy_forecasts = [
         {'timestamp': '2024-01-01 12:00:00', 'wind_speed': 10.0, 'weather_main': 'Clear'},

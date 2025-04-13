@@ -1,6 +1,6 @@
 from typing import Dict, Any
 
-# --- Configuration: Define Scarcity Thresholds and Risk Levels ---
+# Configuration: Define Scarcity Thresholds and Risk Levels 
 # Thresholds for identifying grid stress conditions
 HIGH_LOAD_THRESHOLD_PCT = 10.0  # Load forecast > 10% above normal
 LOW_WIND_THRESHOLD_PCT = -30.0  # Wind forecast < -30% below normal

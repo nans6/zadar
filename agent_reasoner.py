@@ -8,8 +8,9 @@ import pandas as pd
 from models.load_forecast_model import LoadForecaster  
 import logging
 import json
-from datetime import datetime
-
+from datetime import datetime, timedelta
+from api_manager import APIManager, APIError
+import time
 
 logging.basicConfig(
     filename='output.log',
@@ -22,6 +23,199 @@ load_dotenv()
 REPLICATE_API_TOKEN = os.getenv("REPLICATE_API_TOKEN")
 if not REPLICATE_API_TOKEN:
     logging.critical("REPLICATE_API_TOKEN not found in environment variables. LLM calls will fail.")
+
+logger = logging.getLogger(__name__)
+
+class AgentReasoner:
+    def __init__(self, api_manager=None):
+        self.api_manager = api_manager or APIManager()
+        self.data_needs = set()
+        self.cached_data = {}
+        self.last_strategy_time = None
+        self.error_counts = {}
+        
+    def assess_data_needs(self):
+        """Agent determines what data it needs based on current state"""
+        self.data_needs.clear()
+        current_time = datetime.now()
+        
+        # Always need basic weather data for strategy
+        self.data_needs.add(('weather', 'temperature'))
+        self.data_needs.add(('weather', 'wind'))
+        
+        # Check if we need solar potential (only during daylight hours)
+        hour = current_time.hour
+        if 6 <= hour <= 18:  # Daylight hours
+            self.data_needs.add(('weather', 'solar_potential'))
+            
+        # Always need current grid demand
+        self.data_needs.add(('grid', 'demand'))
+        
+        # Need ERCOT data for detailed analysis
+        if self._needs_detailed_forecast():
+            self.data_needs.add(('ercot', 'forecasts'))
+            self.data_needs.add(('ercot', 'prices'))
+            
+        logger.info(f"Assessed data needs: {self.data_needs}")
+        
+    def _needs_detailed_forecast(self):
+        """Determine if we need detailed ERCOT forecast data"""
+        # Get detailed forecast if:
+        # 1. We haven't gotten it recently
+        # 2. Current conditions suggest high volatility
+        if not self.last_strategy_time or \
+           datetime.now() - self.last_strategy_time > timedelta(hours=1):
+            return True
+            
+        try:
+            current_temp = self.cached_data.get(('weather', 'temperature'))
+            if current_temp and current_temp > 35:  # High temperature
+                return True
+        except Exception:
+            pass
+            
+        return False
+        
+    def fetch_required_data(self):
+        """Agent autonomously fetches data it determines it needs"""
+        for api, data_type in self.data_needs:
+            if self.api_manager.should_refresh(api):
+                try:
+                    data = self.api_manager.fetch_data(api, data_type)
+                    self.cached_data[(api, data_type)] = data
+                    self.error_counts[(api, data_type)] = 0  # Reset error count
+                    logger.info(f"Successfully fetched {data_type} from {api}")
+                except APIError as e:
+                    self._handle_api_failure(api, data_type)
+                    
+    def _handle_api_failure(self, api, data_type):
+        """Handle API failures with increasing backoff and alternatives"""
+        key = (api, data_type)
+        self.error_counts[key] = self.error_counts.get(key, 0) + 1
+        
+        logger.warning(f"API failure for {api} {data_type}. Attempt {self.error_counts[key]}")
+        
+        if self.error_counts[key] <= 3:
+            # Use cached data if available
+            if key in self.cached_data:
+                logger.info(f"Using cached data for {api} {data_type}")
+                return
+                
+        # Try alternative data source
+        alt_data = self._get_alternative_data(api, data_type)
+        if alt_data is not None:
+            self.cached_data[key] = alt_data
+            logger.info(f"Using alternative data for {api} {data_type}")
+            
+    def _get_alternative_data(self, api, data_type):
+        """Get alternative data when primary source fails"""
+        if api == 'weather':
+            # Use backup weather API or historical averages
+            return self._get_backup_weather_data(data_type)
+        elif api == 'grid':
+            # Use ERCOT data as backup for grid data
+            try:
+                return self.api_manager.fetch_data('ercot', 'load')
+            except APIError:
+                return None
+        return None
+        
+    def _get_backup_weather_data(self, data_type):
+        """Get backup weather data from alternative source"""
+        # Implement backup weather data source here
+        # For now, return None to indicate no backup available
+        return None
+        
+    def generate_strategy(self):
+        """Generate trading strategy based on available data"""
+        self.assess_data_needs()
+        self.fetch_required_data()
+        
+        try:
+            # Get weather data from the forecast
+            weather_data = self.cached_data.get(('weather', 'forecast'))
+            if not weather_data or 'daily_summaries' not in weather_data:
+                logger.error("Missing or invalid weather forecast data")
+                return None
+            
+            # Get current date key and daily summary
+            current_date = datetime.now().strftime('%Y-%m-%d')
+            daily_summary = weather_data['daily_summaries'].get(current_date, {})
+            
+            if not daily_summary:
+                logger.error(f"No weather summary found for {current_date}")
+                return None
+            
+            # Extract weather metrics
+            current_temp_c = daily_summary.get('avg_temp')
+            current_temp_k = current_temp_c + 273.15 if current_temp_c is not None else 298.15  # Default to 25°C
+            solar_potential_hours = daily_summary.get('solar_potential_hours', 0)
+            wind_speed = daily_summary.get('avg_wind', 0)
+            
+            # Get load predictions
+            load_prediction = get_load_predictions(current_temp_k)
+            if not load_prediction:
+                logger.error("Failed to get load predictions")
+                return None
+            
+            # Calculate renewable metrics from detailed forecast
+            renewable_metrics = calculate_renewable_metrics(weather_data.get('detailed_forecast', []))
+            
+            # Assess price risk based on weather and load
+            risk_factors = {
+                'temperature_risk': abs(current_temp_c - 25) / 15,  # Normalized deviation from 25°C
+                'wind_risk': 1.0 - (wind_speed / 10.0) if wind_speed < 10 else 0,  # Risk increases with low wind
+                'solar_risk': 1.0 - (solar_potential_hours / 12.0),  # Risk increases with low solar potential
+                'load_risk': (load_prediction['predicted_load_mw'] / 65000) if load_prediction['predicted_load_mw'] > 65000 else 0
+            }
+            
+            overall_risk = sum(risk_factors.values()) / len(risk_factors)
+            
+            # Prepare input data for LLM
+            llm_input_data = {
+                'weather_summary': {
+                    'temperature_c': current_temp_c,
+                    'wind_speed': wind_speed,
+                    'solar_potential_hours': solar_potential_hours,
+                    'storm_hours': daily_summary.get('storm_hours', 0),
+                    'extreme_heat_hours': daily_summary.get('extreme_heat_hours', 0)
+                },
+                'load_prediction': {
+                    'current_load_mw': load_prediction['current_load_mw'],
+                    'predicted_load_mw': load_prediction['predicted_load_mw'],
+                    'predicted_load_gw': load_prediction['predicted_load_gw']
+                },
+                'renewable_metrics': renewable_metrics,
+                'risk_assessment': {
+                    'risk_factors': risk_factors,
+                    'overall_risk': overall_risk
+                }
+            }
+            
+            # Generate strategy using LLM
+            strategy = self.generate_strategy_via_replicate(llm_input_data)
+            if strategy:
+                self.last_strategy_time = datetime.now()
+                logger.info(f"Successfully generated strategy with risk level {overall_risk:.2f}")
+                return strategy
+            else:
+                logger.error("Failed to generate strategy via LLM")
+                return None
+            
+        except Exception as e:
+            logger.error(f"Error generating strategy: {str(e)}")
+            return None
+            
+    def calculate_next_cycle_time(self):
+        """Calculate when to run next cycle based on data needs"""
+        next_refresh = float('inf')
+        for api, _ in self.data_needs:
+            if api in self.api_manager.last_fetch:
+                refresh_rate = self.api_manager.available_apis[api]['refresh_rate']
+                time_since_last = time.time() - self.api_manager.last_fetch[api]
+                next_refresh = min(next_refresh, refresh_rate - time_since_last)
+                
+        return max(next_refresh, 60)  # At least 60 seconds between cycles
 
 def get_load_predictions(temp_k: float, timestamp=None) -> Dict[str, Any]:
     """Get load predictions for a given temperature and timestamp."""
@@ -49,7 +243,7 @@ def get_load_predictions(temp_k: float, timestamp=None) -> Dict[str, Any]:
 
 def generate_strategy_via_replicate(llm_input_data: Dict[str, Any]) -> str:
     """
-    Generates hedging strategy recommendations using an LLM on Replicate.
+    Generates hedging strategy recommendations using DeepSeek on Replicate.
 
     Args:
         llm_input_data: Dictionary containing structured inputs:
@@ -64,151 +258,100 @@ def generate_strategy_via_replicate(llm_input_data: Dict[str, Any]) -> str:
         logging.error(error_msg)
         return error_msg
 
-    logging.info("Formatting prompt for Replicate LLM...")
+    logging.info("Formatting prompt for DeepSeek LLM...")
 
-    # Prep Data Snippets for Prompt 
-    weather_summaries = llm_input_data.get('weather_summary', {})
-    weather_str = ""
-    if isinstance(weather_summaries, dict):
-         days = list(weather_summaries.keys())[:3]
-         for day in days:
-             summary = weather_summaries.get(day, {})
-             weather_str += (f"\n  - {day}: Temp {summary.get('min_temp','N/A')} to {summary.get('max_temp','N/A')} C; "
-                             f"Avg Wind {summary.get('avg_wind','N/A')} m/s; Solar Hrs {summary.get('solar_potential_hours','N/A')}")
-    else: weather_str = "Not Available"
+    # Format input data for prompt
+    weather_str = format_weather_summary(llm_input_data.get('weather_summary', {}))
+    renew_str = format_renewable_metrics(llm_input_data.get('renewable_metrics', {}))
+    eia_str = format_eia_data(llm_input_data.get('eia_realtime_data', {}).get('current', {}))
+    load_str = format_load_prediction(llm_input_data.get('load_prediction', {}))
+    risk_str = format_price_risk(llm_input_data.get('price_risk', {}))
+    market_str = format_market_data(llm_input_data.get('market_prices', {}))
 
-    renew_metrics = llm_input_data.get('renewable_metrics', {})
-    wind_dev = renew_metrics.get('wind_deviation_from_normal_pct','N/A')
-    risk_prob_raw = llm_input_data.get('price_risk', {}).get('price_spike_probability', 'N/A')
-    risk_prob_str = f"{risk_prob_raw*100:.0f}%" if isinstance(risk_prob_raw, (int, float)) else "N/A"
+    prompt = f"""You are an expert energy trader and risk analyst for ERCOT. Based on the following data, provide a concise trading strategy:
 
-    renew_str = (f"Avg Wind CF {renew_metrics.get('average_wind_capacity_factor','N/A')} (Dev: {wind_dev}%), "
-                 f"Avg Solar CF {renew_metrics.get('average_solar_capacity_factor_daytime','N/A')} (Dev: {renew_metrics.get('solar_deviation_from_normal_pct','N/A')}%), "
-                 f"Low Wind Periods: {renew_metrics.get('periods_with_low_wind','N/A')}")
-
-    eia_data = llm_input_data.get('eia_realtime_data', {}).get('current', {})
-    eia_str = (f"Timestamp: {eia_data.get('timestamp_iso', 'N/A')}, "
-               f"Demand: {eia_data.get('demand_mw', 'N/A')} MW, "
-               f"Wind Gen: {eia_data.get('wind_mw', 'N/A')} MW, "
-               f"Solar Gen: {eia_data.get('solar_mw', 'N/A')} MW")
-
-    # Load prediction string with LSTM model output
-    load_pred = llm_input_data.get('load_prediction', {})
-    load_str = (f"Current Load: {load_pred.get('current_load_mw', 'N/A')} MW, "
-                f"Predicted Load: {load_pred.get('predicted_load_mw', 'N/A')} MW "
-                f"(Temperature: {load_pred.get('temperature_c', 'N/A')}°C), "
-                f"Peak: {load_pred.get('predicted_load_gw','N/A')} GW")
-
-    price_risk_pred = llm_input_data.get('price_risk', {})
-    risk_str = (f"Prob. Spike > $500/MWh: {risk_prob_str}, "
-                f"Expected Max: ${price_risk_pred.get('expected_max_price','N/A')}/MWh")
-
-    # Format market data
-    market_data = llm_input_data.get('market_prices', {})
-    market_str = ""
-    if market_data:
-        # Calculate reference price (North Hub Peak) for option strikes
-        ref_price = market_data.get('north_peak', 0)
-        atm_strike = ref_price
-        otm_strike = ref_price + 50 if ref_price > 0 else 'N/A'
-        
-        market_str = f"""
-*   **Current Market Prices and Products:**
-    NATURAL GAS:
-    - NG.FUT | Price: ${market_data.get('nat_gas_price', 'N/A')}/MMBtu | Benchmark Henry Hub Natural Gas
-
-    POWER FUTURES ($/MWh):
-    - NTH.PK | North Hub Peak: ${market_data.get('north_peak', 'N/A')} | Reference: ERCOT North
-    - NTH.OP | North Hub Off-Peak: ${market_data.get('north_offpeak', 'N/A')}
-    - HOU.PK | Houston Hub Peak: ${market_data.get('houston_peak', 'N/A')} | Reference: ERCOT Houston
-    - HOU.OP | Houston Hub Off-Peak: ${market_data.get('houston_offpeak', 'N/A')}
-    - STH.PK | South Hub Peak: ${market_data.get('south_peak', 'N/A')} | Reference: ERCOT South
-    - STH.OP | South Hub Off-Peak: ${market_data.get('south_offpeak', 'N/A')}
-    - WST.PK | West Hub Peak: ${market_data.get('west_peak', 'N/A')} | Reference: ERCOT West
-    - WST.OP | West Hub Off-Peak: ${market_data.get('west_offpeak', 'N/A')}
-
-    WEATHER DERIVATIVES:
-    - DAL.CDD | Dallas Cooling Days: ${market_data.get('dallas_cdd', 'N/A')} | Temperature > 65°F
-    - DAL.HDD | Dallas Heating Days: ${market_data.get('dallas_hdd', 'N/A')} | Temperature < 65°F
-    - HOU.CDD | Houston Cooling Days: ${market_data.get('houston_cdd', 'N/A')} | Temperature > 65°F
-    - HOU.HDD | Houston Heating Days: ${market_data.get('houston_hdd', 'N/A')} | Temperature < 65°F
-
-    POWER OPTIONS ($/MWh):
-    - OPT.ATM.C | Premium: ${market_data.get('atm_call_premium', 'N/A')} | Strike: ${atm_strike} | North Hub Peak ATM Call
-    - OPT.ATM.P | Premium: ${market_data.get('atm_put_premium', 'N/A')} | Strike: ${atm_strike} | North Hub Peak ATM Put
-    - OPT.OTM.C | Premium: ${market_data.get('otm_call_premium', 'N/A')} | Strike: ${otm_strike} | North Hub Peak OTM Call"""
-    else:
-        market_str = "Not Available"
-
-    prompt = f"""You are an expert energy trader and risk analyst for ERCOT. Your task is to recommend hedging strategies based on the following data:
-
-**ERCOT Situation Analysis:**
-*   **Weather Forecast Summary (Next ~3 Days):** {weather_str}
-*   **Renewable Generation Forecast Metrics:** {renew_str}
-*   **Current Grid State (from EIA):** {eia_str}
-*   **Load Forecast:** {load_str}
-*   **ERCOT Load Forecast:**
-    - Current System Load: {eia_data.get('demand_mw', 'N/A')} MW
-    - Predicted Peak Load: {load_pred.get('predicted_load_mw', 'N/A')} MW
-    - Temperature Impact: {load_pred.get('temperature_c', 'N/A')}°C
-    - Load Forecast Confidence: High
-*   **Price Risk Assessment:** {risk_str}
+Weather: {weather_str}
+Renewables: {renew_str}
+Grid State: {eia_str}
+Load: {load_str}
+Risk: {risk_str}
 {market_str}
 
-**Market Data Usage Guide:**
-1. Natural Gas (NG.FUT):
-   - Base fuel for power generation
-   - Rule of thumb: Power Price ≈ (Gas Price × 7) + Risk Premium
-   - Higher gas prices typically mean higher power prices
-
-2. Power Hub Spreads:
-   - North vs Houston: Congestion between regions
-   - West vs Other Hubs: Wind generation impact
-   - Peak vs Off-Peak: Load/Solar impact
-   - Trading Opportunity: Buy low hub, sell high hub
-
-3. Weather Derivatives:
-   - CDD (Cooling): Higher value = More AC demand = Higher prices
-   - HDD (Heating): Higher value = More heating = Higher gas demand
-   - Use to hedge temperature-driven demand spikes
-   - Dallas vs Houston spread indicates regional weather patterns
-
-4. Options Strategy (All based on North Hub Peak):
-   - ATM Calls/Puts: Strike price = Current North Hub Peak price
-   - OTM Calls: Strike price = Current North Hub Peak price + $50
-   - Premium vs Strike spread indicates market's view of risk
-   - High Put/Call ratio suggests market expects downside
-
-5. ERCOT Load Forecast:
-   - System-wide load > 65 GW indicates high stress
-   - Load ramp > 10 GW/3hr suggests volatility
-   - Morning ramp 6-9am, evening peak 4-7pm
-   - Weekend load typically 80% of weekday
-   - Reserve margin < 10% signals scarcity risk
-
-**Required Output Format:**
-1. HEDGE ACTIONS: [List 1-2 specific actions using exact ticker symbols, quantities, and both premium & strike prices for options]
-2. RENEWABLE SWITCH: [YES/NO] - Required if wind deviation < -25% AND price risk > 60%
-   Current values: Wind Dev = {wind_dev}%, Price Risk = {risk_prob_str}
-3. JUSTIFICATION: Reference specific tickers, spreads, and strikes in your rationale.
-   Explain product selection based on market conditions.
-4. ERCOT LOAD CONDITIONS: [HIGH/MODERATE/LOW] - Required if system-wide load > 65 GW (HIGH) or < 30 GW (LOW)
-   Current values: System Load = {eia_data.get('demand_mw', 'N/A')} MW, Peak Load = {load_pred.get('predicted_load_mw', 'N/A')} MW"""
+Required Format:
+1. HEDGE ACTIONS: List 2-3 specific trades with exact quantities and prices
+2. RENEWABLE SWITCH: Yes/No (required if wind deviation < -25% AND price risk > 60%)
+3. JUSTIFICATION: Brief explanation referencing specific market conditions
+4. LOAD CONDITIONS: HIGH/MODERATE/LOW based on system load"""
 
     try:
         output = replicate.run(
-            "meta/llama-2-70b-chat:02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3",
-            input={"prompt": prompt,
-                  "temperature": 0.3,
-                  "top_p": 0.9,
-                  "max_tokens": 1000,
-                  "system_prompt": "You are an expert energy trader and risk analyst specializing in ERCOT market analysis. You MUST format your responses exactly as requested in the prompt's Required Output Format section, using the exact ticker symbols and market data provided. Always specify exact quantities, premiums, and strike prices in your hedge actions. Be precise and quantitative in your recommendations."}
+            "deepseek-ai/deepseek-r1",
+            input={
+                "prompt": prompt,
+                "temperature": 0.3,
+                "top_p": 0.9,
+                "max_tokens": 4000,
+                "system_prompt": "You are an expert energy trader. Keep responses concise and focused on specific trading actions."
+            }
         )
         
-        return ''.join(output)
+        # Handle both streaming and non-streaming responses
+        if hasattr(output, '__iter__'):
+            response = "".join(str(chunk) for chunk in output)
+        else:
+            response = str(output)
+            
+        logging.info(f"Strategy generated successfully: {response[:100]}...")
+        return response
         
     except Exception as e:
-        return f"Error calling Replicate API: {str(e)}"
+        error_msg = f"Error generating strategy: {str(e)}"
+        logging.error(error_msg)
+        return error_msg
+
+def format_weather_summary(weather_data: Dict) -> str:
+    if not weather_data:
+        return "Not available"
+    days = list(weather_data.keys())[:3]
+    summaries = []
+    for day in days:
+        summary = weather_data.get(day, {})
+        summaries.append(
+            f"{day}: {summary.get('min_temp','N/A')}-{summary.get('max_temp','N/A')}°C, "
+            f"Wind {summary.get('avg_wind','N/A')}m/s"
+        )
+    return "; ".join(summaries)
+
+def format_renewable_metrics(metrics: Dict) -> str:
+    if not metrics:
+        return "Not available"
+    return (f"Wind CF {metrics.get('average_wind_capacity_factor','N/A')}, "
+            f"Dev {metrics.get('wind_deviation_from_normal_pct','N/A')}%, "
+            f"Solar CF {metrics.get('average_solar_capacity_factor_daytime','N/A')}")
+
+def format_eia_data(data: Dict) -> str:
+    if not data:
+        return "Not available"
+    return (f"Demand {data.get('demand_mw','N/A')}MW, "
+            f"Wind {data.get('wind_mw','N/A')}MW, "
+            f"Solar {data.get('solar_mw','N/A')}MW")
+
+def format_load_prediction(pred: Dict) -> str:
+    if not pred:
+        return "Not available"
+    return (f"Current {pred.get('current_load_mw','N/A')}MW, "
+            f"Predicted {pred.get('predicted_load_mw','N/A')}MW")
+
+def format_price_risk(risk: Dict) -> str:
+    if not risk:
+        return "Not available"
+    return (f"Spike prob {risk.get('price_spike_probability','N/A')}, "
+            f"Level {risk.get('risk_level','N/A')}")
+
+def format_market_data(data: Dict) -> str:
+    if not data:
+        return ""
+    return f"\nMarket Prices: North Peak ${data.get('north_peak','N/A')}, West Peak ${data.get('west_peak','N/A')}"
 
 # Test Cases
 if __name__ == "__main__":
