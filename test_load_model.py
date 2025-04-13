@@ -3,7 +3,6 @@ import sys
 
 def test_load_model():
     try:
-        # Try to load the model with CPU mapping
         print("Attempting to load model...")
         model = torch.load('lstm_4h_optimal_model.pt', map_location=torch.device('cpu'))
         print("\nModel loaded successfully!")

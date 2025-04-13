@@ -4,17 +4,14 @@ import os
 from dotenv import load_dotenv
 
 def test_load_forecast():
-    # Load environment variables
     load_dotenv()
     
-    # Verify ERCOT API key is set
     api_key = os.getenv('ERCOT_API_KEY')
     if not api_key:
         print("Warning: ERCOT_API_KEY not found in environment variables")
         return
     
     try:
-        # Initialize forecaster
         print("Initializing load forecaster...")
         forecaster = LoadForecaster()
         

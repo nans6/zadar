@@ -6,7 +6,6 @@ from statistics import mean
 from datetime import datetime, timedelta, timezone
 import pandas as pd
 
-# Load environment variables
 load_dotenv()
 
 # Weather condition constants
@@ -33,7 +32,6 @@ def get_eia_realtime_grid_data(region_id: str = "TEX", hours_back: int = 24) -> 
 
     BASE_URL = "https://api.eia.gov/v2/electricity/rto/region-data/data"
     
-    # Use current time and get historical data
     end_dt = datetime.now(timezone.utc)
     start_dt = end_dt - timedelta(hours=hours_back)
 
@@ -62,24 +60,19 @@ def get_eia_realtime_grid_data(region_id: str = "TEX", hours_back: int = 24) -> 
 
         df = pd.DataFrame(data['response']['data'])
         
-        # Convert value column to numeric before pivoting
         df['value'] = pd.to_numeric(df['value'])
         
-        # Create a mapping for the types to more readable names
         type_mapping = {
             "D": "demand_mw",
             "NG.WND": "wind_mw",
             "NG.SUN": "solar_mw"
         }
         
-        # Pivot the data and rename columns
         pivot_df = df.pivot(index='period', columns='type', values='value')
         pivot_df = pivot_df.rename(columns=type_mapping)
         
-        # Sort by most recent first
         pivot_df = pivot_df.sort_index(ascending=False)
         
-        # Get latest complete data point
         latest_complete_data = pivot_df.iloc[0]
         latest_timestamp_str = latest_complete_data.name
 
@@ -143,37 +136,31 @@ def get_weather_forecast() -> Dict[str, Any]:
         response.raise_for_status()
         forecast_data = response.json()
         
-        # Enhanced forecast analysis
         simplified_forecast = []
         daily_stats = {}
         current_date = None
         
         for item in forecast_data["list"]:
-            # Parse timestamp and extract hour
             timestamp = datetime.strptime(item["dt_txt"], "%Y-%m-%d %H:%M:%S")
             date_key = timestamp.strftime("%Y-%m-%d")
             hour = timestamp.hour
             
-            # Extract weather metrics
             temp = item["main"]["temp"]
             wind_speed = item["wind"]["speed"]
             humidity = item["main"]["humidity"]
             weather_main = item["weather"][0]["main"]
             clouds = item["clouds"]["all"]
             
-            # Calculate weather risks
             storm_risk = weather_main in STORM_RISK_CONDITIONS
             high_humidity = humidity >= HIGH_HUMIDITY_THRESHOLD
             extreme_heat = temp > EXTREME_HEAT_THRESHOLD
             
-            # Calculate solar generation potential
             solar_potential = "High" if (
                 hour in SOLAR_GENERATION_HOURS and 
                 clouds < 50 and 
                 not storm_risk
             ) else "Low"
             
-            # Initialize daily stats if new date
             if date_key not in daily_stats:
                 daily_stats[date_key] = {
                     "temperatures": [],
@@ -185,7 +172,6 @@ def get_weather_forecast() -> Dict[str, Any]:
                     "solar_potential_hours": 0
                 }
             
-            # Update daily statistics
             stats = daily_stats[date_key]
             stats["temperatures"].append(temp)
             stats["wind_speeds"].append(wind_speed)
@@ -195,7 +181,6 @@ def get_weather_forecast() -> Dict[str, Any]:
             if extreme_heat: stats["extreme_heat_hours"] += 1
             if solar_potential == "High": stats["solar_potential_hours"] += 1
             
-            # Add to detailed forecast
             simplified_forecast.append({
                 "timestamp": item["dt_txt"],
                 "temperature": temp,
@@ -211,7 +196,6 @@ def get_weather_forecast() -> Dict[str, Any]:
                 "solar_potential": solar_potential
             })
         
-        # Calculate overall statistics and daily summaries
         daily_summaries = {}
         for date, stats in daily_stats.items():
             daily_summaries[date] = {
@@ -239,7 +223,6 @@ def get_weather_forecast() -> Dict[str, Any]:
         return {"error": f"Failed to fetch weather data: {str(e)}"}
 
 if __name__ == "__main__":
-    # Test weather forecast
     print("\nTesting weather forecast...")
     weather_data = get_weather_forecast()
     if "error" not in weather_data:
@@ -253,7 +236,6 @@ if __name__ == "__main__":
     else:
         print(f"Error: {weather_data['error']}")
 
-    # Test EIA data fetch
     print("\nTesting EIA data fetch...")
     eia_data = get_eia_realtime_grid_data("TEX")
     if eia_data:

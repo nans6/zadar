@@ -1,21 +1,19 @@
 # main_agent.py
 import data_fetcher
 import models.renewables_model as renewables_model
-# Import other future modules placeholder:
-# import models.load_forecast_model as load_model
-import models.price_risk_model as risk_model  # Add price risk model import
-import agent_reasoner  # Add the new import
+import models.price_risk_model as risk_model  
+import agent_reasoner  
 import pandas as pd
-# import strategy_engine
+
 
 from pprint import pprint
 from dotenv import load_dotenv
 
 def run_agent_cycle():
     print("--- Running Agent Cycle ---")
-    load_dotenv() # Ensure keys are loaded for this run
+    load_dotenv() 
 
-    # 1. Perception
+    # Perception
     print("Fetching weather data...")
     weather_data = data_fetcher.get_weather_forecast()
     if "error" in weather_data:
@@ -44,7 +42,7 @@ def run_agent_cycle():
     else:
         print("Warning: Could not retrieve EIA data. Proceeding without it.")
 
-    # 2. Reasoning - Quantitative Models
+    # Reasoning - Quantitative Models
     print("\nCalculating renewable energy forecast metrics...")
     # Use detailed_forecast instead of forecasts
     renewable_metrics = {}
@@ -61,39 +59,56 @@ def run_agent_cycle():
     else:
          print("Warning: No detailed forecast found in weather data to calculate renewable metrics.")
 
-    # --- Placeholders for other models ---
-    print("\nPredicting load (Placeholder)...")
-    # load_prediction = load_model.predict_load(weather_data)
-    load_prediction = {"predicted_peak_load_gw": 72.5, "load_vs_normal_pct": 5.0} # Dummy data
-    print(load_prediction)
+    # Get current temperature from weather data
+    print("\nPredicting load...")
+    current_temp_k = None
+    if 'detailed_forecast' in weather_data and weather_data['detailed_forecast']:
+        # Get the first forecast point's temperature
+        first_forecast = weather_data['detailed_forecast'][0]
+        if 'temperature' in first_forecast:
+            current_temp_k = first_forecast['temperature'] + 273.15  # Convert Celsius to Kelvin
+    
+    if current_temp_k is None:
+        print("Warning: Could not get temperature from weather data, using default")
+        current_temp_k = 298.15  # 25°C in Kelvin
+
+    load_prediction = agent_reasoner.get_load_predictions(current_temp_k)
+    if load_prediction:
+        print("\nLoad Prediction Results:")
+        pprint(load_prediction)
+    else:
+        print("Warning: Load prediction failed")
+        load_prediction = {"predicted_load_gw": 0, "load_vs_normal_pct": 0}
+
+    print("\nLoading market data from CSV...")
+    try:
+        market_data = pd.read_csv('data/synthetic_market_data.csv').to_dict(orient='records')[0]  # Get first scenario by default
+    except Exception as e:
+        print(f"Warning: Could not load market data from CSV: {e}")
+        market_data = {}
 
     print("\nAssessing price risk...")
     price_risk = risk_model.assess_price_risk(
         load_prediction=load_prediction,
         renewable_metrics=renewable_metrics,
-        market_data=None  # Optional: Add market data when available
+        market_data=market_data  
     )
     print("\nPrice Risk Assessment:")
     pprint(price_risk)
 
-    # --- Load Market Data from CSV ---
-    print("\nLoading market data from CSV...")
-    try:
-        market_data = pd.read_csv('data/synthetic_market_data.csv').to_dict(orient='records')[0]  # Get first scenario by default
-        # If we have risk metrics, try to find the most appropriate scenario
-        if price_risk and 'price_spike_probability' in price_risk:
+    # If we have risk metrics, try to find a more appropriate market scenario
+    if price_risk and 'price_spike_probability' in price_risk:
+        try:
             risk_level = price_risk['price_spike_probability']
             df = pd.read_csv('data/synthetic_market_data.csv')
             # Find the scenario with the closest risk level
             closest_scenario = df.iloc[(df['risk_level'] - risk_level).abs().argsort()[:1]]
             market_data = closest_scenario.to_dict(orient='records')[0]
-        print("\nMarket Data (from CSV):")
-        pprint(market_data)
-    except Exception as e:
-        print(f"Warning: Could not load market data from CSV: {e}")
-        market_data = {}
+            print("\nUpdated Market Data (matched to risk level):")
+            pprint(market_data)
+        except Exception as e:
+            print(f"Warning: Could not update market data based on risk level: {e}")
 
-    # --- Create Input Dictionary for LLM ---
     llm_input_data = {
         "weather_summary": weather_data.get('daily_summaries', {}),
         "renewable_metrics": renewable_metrics,
@@ -105,7 +120,6 @@ def run_agent_cycle():
     print("\n--- Data Sent to LLM ---")
     pprint(llm_input_data)
 
-    # --- Generate Strategy via LLM ---
     print("\n--- Generating Strategy ---")
     strategy = agent_reasoner.generate_strategy_via_replicate(llm_input_data)
     print("\nStrategy:")

@@ -3,16 +3,49 @@ import replicate
 import os
 from dotenv import load_dotenv
 from typing import Dict, Any
-from pprint import pprint # For testing output
+from pprint import pprint 
 import pandas as pd
+from models.load_forecast_model import LoadForecaster  
+import logging
+import json
+from datetime import datetime
 
-# Load environment variables
+
+logging.basicConfig(
+    filename='output.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+
 load_dotenv()
 
-# Configure Replicate client
 REPLICATE_API_TOKEN = os.getenv("REPLICATE_API_TOKEN")
 if not REPLICATE_API_TOKEN:
-    print("CRITICAL WARNING: REPLICATE_API_TOKEN not found in environment variables. LLM calls will fail.")
+    logging.critical("REPLICATE_API_TOKEN not found in environment variables. LLM calls will fail.")
+
+def get_load_predictions(temp_k: float, timestamp=None) -> Dict[str, Any]:
+    """Get load predictions for a given temperature and timestamp."""
+    try:
+        forecaster = LoadForecaster()
+        prediction = forecaster.predict(temp_k, timestamp)
+        if prediction['status'] == 'success':
+            result = {
+                'predicted_load_mw': prediction['predicted_load_mw'],
+                'predicted_load_gw': prediction['predicted_load_mw'] / 1000,  # Convert to GW
+                'timestamp': prediction['timestamp'],
+                'temperature_c': temp_k - 273.15,
+                'current_load_mw': prediction.get('current_load', 45000.0)  # Use default if unavailable
+            }
+            logging.info(f"Load prediction successful: {json.dumps(result, indent=2)}")
+            return result
+        else:
+            error_msg = f"Warning: Load prediction failed: {prediction.get('error_message', 'Unknown error')}"
+            logging.warning(error_msg)
+            return None
+    except Exception as e:
+        error_msg = f"Error getting load predictions: {e}"
+        logging.error(error_msg)
+        return None
 
 def generate_strategy_via_replicate(llm_input_data: Dict[str, Any]) -> str:
     """
@@ -27,11 +60,13 @@ def generate_strategy_via_replicate(llm_input_data: Dict[str, Any]) -> str:
         String with LLM's strategy recommendation or an error message.
     """
     if not REPLICATE_API_TOKEN:
-         return "Error: Replicate API Token not configured."
+        error_msg = "Error: Replicate API Token not configured."
+        logging.error(error_msg)
+        return error_msg
 
-    print("Formatting prompt for Replicate LLM...")
+    logging.info("Formatting prompt for Replicate LLM...")
 
-    # --- 1. Prepare Data Snippets for Prompt ---
+    # Prep Data Snippets for Prompt 
     weather_summaries = llm_input_data.get('weather_summary', {})
     weather_str = ""
     if isinstance(weather_summaries, dict):
@@ -57,9 +92,12 @@ def generate_strategy_via_replicate(llm_input_data: Dict[str, Any]) -> str:
                f"Wind Gen: {eia_data.get('wind_mw', 'N/A')} MW, "
                f"Solar Gen: {eia_data.get('solar_mw', 'N/A')} MW")
 
+    # Load prediction string with LSTM model output
     load_pred = llm_input_data.get('load_prediction', {})
-    load_str = (f"Peak: {load_pred.get('predicted_peak_load_gw','N/A')} GW "
-                f"({load_pred.get('load_vs_normal_pct','N/A')}% vs Normal)")
+    load_str = (f"Current Load: {load_pred.get('current_load_mw', 'N/A')} MW, "
+                f"Predicted Load: {load_pred.get('predicted_load_mw', 'N/A')} MW "
+                f"(Temperature: {load_pred.get('temperature_c', 'N/A')}°C), "
+                f"Peak: {load_pred.get('predicted_load_gw','N/A')} GW")
 
     price_risk_pred = llm_input_data.get('price_risk', {})
     risk_str = (f"Prob. Spike > $500/MWh: {risk_prob_str}, "
@@ -102,15 +140,18 @@ def generate_strategy_via_replicate(llm_input_data: Dict[str, Any]) -> str:
     else:
         market_str = "Not Available"
 
-    # --- 2. Construct the Prompt with Specific Renewable Switch Instruction ---
-    prompt_text = f"""
-System: You are an expert ERCOT energy risk hedging assistant. Analyze the data and provide a CONCISE recommendation. Skip detailed explanations and focus on actionable items.
+    prompt = f"""You are an expert energy trader and risk analyst for ERCOT. Your task is to recommend hedging strategies based on the following data:
 
 **ERCOT Situation Analysis:**
 *   **Weather Forecast Summary (Next ~3 Days):** {weather_str}
 *   **Renewable Generation Forecast Metrics:** {renew_str}
 *   **Current Grid State (from EIA):** {eia_str}
 *   **Load Forecast:** {load_str}
+*   **ERCOT Load Forecast:**
+    - Current System Load: {eia_data.get('demand_mw', 'N/A')} MW
+    - Predicted Peak Load: {load_pred.get('predicted_load_mw', 'N/A')} MW
+    - Temperature Impact: {load_pred.get('temperature_c', 'N/A')}°C
+    - Load Forecast Confidence: High
 *   **Price Risk Assessment:** {risk_str}
 {market_str}
 
@@ -138,111 +179,113 @@ System: You are an expert ERCOT energy risk hedging assistant. Analyze the data 
    - Premium vs Strike spread indicates market's view of risk
    - High Put/Call ratio suggests market expects downside
 
+5. ERCOT Load Forecast:
+   - System-wide load > 65 GW indicates high stress
+   - Load ramp > 10 GW/3hr suggests volatility
+   - Morning ramp 6-9am, evening peak 4-7pm
+   - Weekend load typically 80% of weekday
+   - Reserve margin < 10% signals scarcity risk
+
 **Required Output Format:**
 1. HEDGE ACTIONS: [List 1-2 specific actions using exact ticker symbols, quantities, and both premium & strike prices for options]
 2. RENEWABLE SWITCH: [YES/NO] - Required if wind deviation < -25% AND price risk > 60%
    Current values: Wind Dev = {wind_dev}%, Price Risk = {risk_prob_str}
 3. JUSTIFICATION: Reference specific tickers, spreads, and strikes in your rationale.
    Explain product selection based on market conditions.
+4. ERCOT LOAD CONDITIONS: [HIGH/MODERATE/LOW] - Required if system-wide load > 65 GW (HIGH) or < 30 GW (LOW)
+   Current values: System Load = {eia_data.get('demand_mw', 'N/A')} MW, Peak Load = {load_pred.get('predicted_load_mw', 'N/A')} MW"""
 
-Keep the entire response under 200 words. Be direct and specific.
-"""
-
-    # --- 3. Choose Model and Define Input ---
-    model_identifier = "deepseek-ai/deepseek-r1"
-
-    input_data = {
-        "prompt": prompt_text,
-        "max_tokens": 2048,  # Increased for safety
-        "temperature": 0.3,  # Lower temp for more focused responses
-        "top_p": 0.9,
-        "presence_penalty": 0.1,  # Slight penalty to avoid repetition
-        "frequency_penalty": 0.1
-    }
-
-    # --- 4. Call Replicate API ---
     try:
-        print(f"Calling Replicate API for model: {model_identifier}...")
-        output_iterator = replicate.stream(model_identifier, input=input_data)
-        llm_output = "".join([str(event) for event in output_iterator])
-        print("Replicate Response Received.")
-        return llm_output.strip()
+        output = replicate.run(
+            "meta/llama-2-70b-chat:02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3",
+            input={"prompt": prompt,
+                  "temperature": 0.3,
+                  "top_p": 0.9,
+                  "max_tokens": 1000,
+                  "system_prompt": "You are an expert energy trader and risk analyst specializing in ERCOT market analysis. You MUST format your responses exactly as requested in the prompt's Required Output Format section, using the exact ticker symbols and market data provided. Always specify exact quantities, premiums, and strike prices in your hedge actions. Be precise and quantitative in your recommendations."}
+        )
+        
+        return ''.join(output)
+        
     except Exception as e:
-        print(f"ERROR calling Replicate API: {type(e).__name__} - {e}")
-        # Add hints based on common errors
-        if REPLICATE_API_TOKEN and ("authenticate" in str(e).lower() or "token" in str(e).lower()):
-             print("Hint: Double-check your REPLICATE_API_TOKEN value in the .env file and on Replicate.")
-        elif not REPLICATE_API_TOKEN:
-             print("Hint: REPLICATE_API_TOKEN environment variable is not set.")
-        elif "Model" in str(e) and "not found" in str(e):
-             print(f"Hint: Check if model identifier '{model_identifier}' is correct on Replicate.")
-        return f"Error generating strategy via Replicate: {type(e).__name__} - {e}"
+        return f"Error calling Replicate API: {str(e)}"
 
-# --- Test Harness ---
-if __name__ == '__main__':
-    print("--- Running agent_reasoner.py Standalone Test ---")
-
-    # Load market data scenarios
-    try:
-        market_scenarios = pd.read_csv('data/synthetic_market_data.csv').to_dict(orient='records')
-        print("\nLoaded market scenarios from CSV successfully.")
-    except Exception as e:
-        print(f"\nError loading market scenarios: {e}")
-        market_scenarios = []
-
-    # Test Case 1: Low Risk, High Wind (Should NOT recommend switch)
-    print("\n=== Test Case 1: Low Risk, Normal/High Wind ===")
+# Test Cases
+if __name__ == "__main__":
+    logging.info("Starting test cases...")
+    
+    # Test Case 1: Low Risk with High Wind
     test_input_1 = {
-        'weather_summary': {'2024-07-01': {'min_temp': 25, 'max_temp': 35, 'avg_wind': 8, 'solar_potential_hours': 8}},
-        'renewable_metrics': {'wind_deviation_from_normal_pct': 10.0, 'periods_with_low_wind': 1, 
-                            'solar_deviation_from_normal_pct': 5.0, 'average_wind_capacity_factor': 0.4, 
-                            'average_solar_capacity_factor_daytime': 0.28},
-        'eia_realtime_data': {'current': {'timestamp_iso': '2024-07-01T14:00:00Z', 
-                                         'demand_mw': 60000, 'wind_mw': 18000, 'solar_mw': 5000}},
-        'load_prediction': {'predicted_peak_load_gw': 70, 'load_vs_normal_pct': 2.0},
-        'price_risk': {'price_spike_probability': 0.15, 'expected_max_price': 100},
-        'market_prices': next((scenario for scenario in market_scenarios if scenario['scenario'] == 'normal_conditions'), {})
+        'weather_summary': {
+            '2024-04-13': {'min_temp': 15, 'max_temp': 25, 'avg_wind': 8.5, 'solar_potential_hours': 10},
+            '2024-04-14': {'min_temp': 16, 'max_temp': 26, 'avg_wind': 9.0, 'solar_potential_hours': 11},
+            '2024-04-15': {'min_temp': 14, 'max_temp': 24, 'avg_wind': 8.0, 'solar_potential_hours': 10}
+        },
+        'renewable_metrics': {
+            'average_wind_capacity_factor': 0.45,
+            'wind_deviation_from_normal_pct': 15,
+            'average_solar_capacity_factor_daytime': 0.65,
+            'solar_deviation_from_normal_pct': 5,
+            'periods_with_low_wind': 2
+        },
+        'eia_realtime_data': {
+            'current': {
+                'timestamp_iso': '2024-04-13T10:00:00',
+                'demand_mw': 45000,
+                'wind_mw': 15000,
+                'solar_mw': 8000
+            }
+        },
+        'price_risk': {
+            'price_spike_probability': 0.15,
+            'risk_level': 'LOW',
+            'risk_factors': ['High renewable generation', 'Moderate demand']
+        }
     }
-    print("\nInput Data:")
-    pprint(test_input_1)
-    strategy1 = generate_strategy_via_replicate(test_input_1)
-    print(f"\nGenerated Strategy 1:\n{strategy1}")
-    print("-" * 80)
+    
+    # Adding load predictions to test case
+    test_input_1['load_prediction'] = get_load_predictions(298.15)  # 25°C
+    
+    logging.info("\nTest Case 1: Low Risk with High Wind")
+    logging.info(f"\nInput Data:\n{json.dumps(test_input_1, indent=2)}")
+    strategy_1 = generate_strategy_via_replicate(test_input_1)
+    logging.info(f"\nStrategy Recommendation:\n{strategy_1}")
 
-    # Test Case 2: High Risk, Low Wind (Should recommend switch)
-    print("\n=== Test Case 2: High Risk, Low Wind ===")
+    # Test Case 2: High Risk with Low Wind
     test_input_2 = {
-        'weather_summary': {'2024-08-15': {'min_temp': 30, 'max_temp': 40, 'avg_wind': 3, 'solar_potential_hours': 9}},
-        'renewable_metrics': {'wind_deviation_from_normal_pct': -55.0, 'periods_with_low_wind': 20, 
-                            'solar_deviation_from_normal_pct': -10.0, 'average_wind_capacity_factor': 0.15, 
-                            'average_solar_capacity_factor_daytime': 0.22},
-        'eia_realtime_data': {'current': {'timestamp_iso': '2024-08-15T14:00:00Z', 
-                                         'demand_mw': 78000, 'wind_mw': 4000, 'solar_mw': 6000}},
-        'load_prediction': {'predicted_peak_load_gw': 82, 'load_vs_normal_pct': 18.0},
-        'price_risk': {'price_spike_probability': 0.80, 'expected_max_price': 1500},
-        'market_prices': next((scenario for scenario in market_scenarios if scenario['scenario'] == 'extreme_heat_high_risk'), {})
+        'weather_summary': {
+            '2024-04-13': {'min_temp': 30, 'max_temp': 38, 'avg_wind': 3.5, 'solar_potential_hours': 12},
+            '2024-04-14': {'min_temp': 31, 'max_temp': 39, 'avg_wind': 3.0, 'solar_potential_hours': 11},
+            '2024-04-15': {'min_temp': 32, 'max_temp': 40, 'avg_wind': 2.5, 'solar_potential_hours': 10}
+        },
+        'renewable_metrics': {
+            'average_wind_capacity_factor': 0.15,
+            'wind_deviation_from_normal_pct': -45,
+            'average_solar_capacity_factor_daytime': 0.75,
+            'solar_deviation_from_normal_pct': 10,
+            'periods_with_low_wind': 8
+        },
+        'eia_realtime_data': {
+            'current': {
+                'timestamp_iso': '2024-04-13T14:00:00',
+                'demand_mw': 65000,
+                'wind_mw': 5000,
+                'solar_mw': 12000
+            }
+        },
+        'price_risk': {
+            'price_spike_probability': 0.65,
+            'risk_level': 'HIGH',
+            'risk_factors': ['Low wind generation', 'High temperatures', 'Peak demand hours']
+        }
     }
-    print("\nInput Data:")
-    pprint(test_input_2)
-    strategy2 = generate_strategy_via_replicate(test_input_2)
-    print(f"\nGenerated Strategy 2:\n{strategy2}")
-    print("-" * 80)
+    
+    # Adding load predictions to test case
+    test_input_2['load_prediction'] = get_load_predictions(308.15)  # 35°C
+    
+    logging.info("\nTest Case 2: High Risk with Low Wind")
+    logging.info(f"\nInput Data:\n{json.dumps(test_input_2, indent=2)}")
+    strategy_2 = generate_strategy_via_replicate(test_input_2)
+    logging.info(f"\nStrategy Recommendation:\n{strategy_2}")
 
-    # Test Case 3: Extreme Cold (Test weather derivatives)
-    print("\n=== Test Case 3: Extreme Cold ===")
-    test_input_3 = {
-        'weather_summary': {'2024-01-15': {'min_temp': -5, 'max_temp': 5, 'avg_wind': 6, 'solar_potential_hours': 4}},
-        'renewable_metrics': {'wind_deviation_from_normal_pct': -20.0, 'periods_with_low_wind': 8, 
-                            'solar_deviation_from_normal_pct': -30.0, 'average_wind_capacity_factor': 0.25, 
-                            'average_solar_capacity_factor_daytime': 0.15},
-        'eia_realtime_data': {'current': {'timestamp_iso': '2024-01-15T14:00:00Z', 
-                                         'demand_mw': 65000, 'wind_mw': 8000, 'solar_mw': 2000}},
-        'load_prediction': {'predicted_peak_load_gw': 75, 'load_vs_normal_pct': 12.0},
-        'price_risk': {'price_spike_probability': 0.65, 'expected_max_price': 800},
-        'market_prices': next((scenario for scenario in market_scenarios if scenario['scenario'] == 'extreme_cold_high_risk'), {})
-    }
-    print("\nInput Data:")
-    pprint(test_input_3)
-    strategy3 = generate_strategy_via_replicate(test_input_3)
-    print(f"\nGenerated Strategy 3:\n{strategy3}")
-    print("-" * 80)
+    logging.info("Test cases completed.")

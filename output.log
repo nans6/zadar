@@ -1,0 +1,1169 @@
+2025-04-13 11:16:45,988 - INFO - Starting test cases...
+2025-04-13 11:16:46,636 - INFO - Load prediction successful: {
+  "predicted_load_mw": 70716.54319763184,
+  "predicted_load_gw": 70.71654319763184,
+  "timestamp": "2025-04-13T11:16:45.995228",
+  "temperature_c": 25.0,
+  "current_load_mw": 45000.0
+}
+2025-04-13 11:16:46,636 - INFO - 
+Test Case 1: Low Risk with High Wind
+2025-04-13 11:16:46,636 - INFO - 
+Input Data:
+{
+  "weather_summary": {
+    "2024-04-13": {
+      "min_temp": 15,
+      "max_temp": 25,
+      "avg_wind": 8.5,
+      "solar_potential_hours": 10
+    },
+    "2024-04-14": {
+      "min_temp": 16,
+      "max_temp": 26,
+      "avg_wind": 9.0,
+      "solar_potential_hours": 11
+    },
+    "2024-04-15": {
+      "min_temp": 14,
+      "max_temp": 24,
+      "avg_wind": 8.0,
+      "solar_potential_hours": 10
+    }
+  },
+  "renewable_metrics": {
+    "average_wind_capacity_factor": 0.45,
+    "wind_deviation_from_normal_pct": 15,
+    "average_solar_capacity_factor_daytime": 0.65,
+    "solar_deviation_from_normal_pct": 5,
+    "periods_with_low_wind": 2
+  },
+  "eia_realtime_data": {
+    "current": {
+      "timestamp_iso": "2024-04-13T10:00:00",
+      "demand_mw": 45000,
+      "wind_mw": 15000,
+      "solar_mw": 8000
+    }
+  },
+  "price_risk": {
+    "price_spike_probability": 0.15,
+    "risk_level": "LOW",
+    "risk_factors": [
+      "High renewable generation",
+      "Moderate demand"
+    ]
+  },
+  "load_prediction": {
+    "predicted_load_mw": 70716.54319763184,
+    "predicted_load_gw": 70.71654319763184,
+    "timestamp": "2025-04-13T11:16:45.995228",
+    "temperature_c": 25.0,
+    "current_load_mw": 45000.0
+  }
+}
+2025-04-13 11:16:46,636 - INFO - Formatting prompt for Replicate LLM...
+2025-04-13 11:16:46,884 - INFO - HTTP Request: POST https://api.replicate.com/v1/predictions "HTTP/1.1 201 Created"
+2025-04-13 11:16:46,953 - INFO - HTTP Request: GET https://api.replicate.com/v1/models/meta/llama-2-70b-chat/versions/02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3 "HTTP/1.1 200 OK"
+2025-04-13 11:16:47,554 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:48,162 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:48,767 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:49,362 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:49,970 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:50,580 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:51,176 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:51,781 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:52,376 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:52,979 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:53,581 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:54,182 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:54,777 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:55,378 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:55,977 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:56,577 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:57,180 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:57,783 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:58,386 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:58,993 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:16:59,595 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:17:00,205 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:17:00,801 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:17:01,413 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:17:02,031 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:17:02,666 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/fvgr1vbtqdrj00cp5ywtmh6d30 "HTTP/1.1 200 OK"
+2025-04-13 11:17:02,667 - INFO - 
+Strategy Recommendation:
+ Based on the provided data, I recommend a hedging strategy that takes into account the relationship between predicted load and renewable generation, current market conditions, weather impact, and risk mitigation approaches.
+
+1. Hedging Instruments:
+a. Wind Futures: Consider buying wind futures contracts to hedge against a potential shortfall in wind generation. With a forecasted temperature range of 15-25°C and average wind speed of 8.5-9.0 m/s, there is a moderate probability of low wind periods. Buying wind futures contracts will help mitigate the risk of reduced wind generation during these periods.
+
+b. Solar Futures: Sell solar futures contracts to hedge against excess solar generation. With a forecasted temperature range of 14-24°C and average solar hours of 10-11, there is a high probability of excess solar generation. Selling solar futures contracts will help mitigate the risk of over-generation and reduce the likelihood of price spikes.
+
+c. Load Following Swaps: Enter into load following swaps to hedge against the variability in demand. With a predicted load of 70716.54319763184 MW and a peak of 70.71654319763184 GW, there is a moderate probability of price spikes due to high demand. Load following swaps will help mitigate the risk of price volatility by aligning the hedge with the predicted load.
+2. Timing:
+a. Wind Futures: Buy wind futures contracts 2-3 days before the delivery period to take advantage of the forecasted wind conditions. This will help mitigate the risk of low wind periods during the delivery period.
+
+b. Solar Futures: Sell solar futures contracts 1-2 days before the delivery period to take advantage of the forecasted solar conditions. This will help mitigate the risk of excess solar generation during the delivery period.
+
+c. Load Following Swaps: Enter into load following swaps 1-2 days before the delivery period to align the hedge with the predicted load. This will help mitigate the risk of price volatility due to high demand.
+3. Risk Mitigation Approaches:
+a. Stop-Loss Orders: Place stop-loss orders 10-15% above the predicted load to mitigate the risk of price spikes. This will automatically trigger the sale of wind futures contracts or the purchase of solar futures contracts if the load exceeds the predicted level.
+
+b. Option Contracts: Consider buying option contracts to mitigate the risk of extreme weather events. For example, buying a call option on wind futures contracts will give the right, but not the obligation, to buy wind futures contracts at a specified price if wind generation is lower than expected.
+
+c. Diversification: Diversify the hedging portfolio by entering into hedging contracts with different tenors and strike prices. This will help mitigate the risk of price volatility by spreading the hedge across different periods and price levels.
+
+In summary, the recommended hedging strategy is to buy wind futures contracts, sell solar futures contracts, and enter into load following swaps. The timing of these hedging instruments should be 2-3 days before the delivery period for wind futures and 1-2 days before the delivery period for solar futures and load following swaps. To mitigate risks, place stop-loss orders, consider buying option contracts, and diversify the hedging portfolio. This strategy will help manage risks associated with predicted load, renewable generation, and weather impact while taking into account current market conditions and price spike probability.
+2025-04-13 11:17:03,572 - INFO - Load prediction successful: {
+  "predicted_load_mw": 67985.9733581543,
+  "predicted_load_gw": 67.9859733581543,
+  "timestamp": "2025-04-13T11:17:02.672938",
+  "temperature_c": 35.0,
+  "current_load_mw": 45000.0
+}
+2025-04-13 11:17:03,572 - INFO - 
+Test Case 2: High Risk with Low Wind
+2025-04-13 11:17:03,572 - INFO - 
+Input Data:
+{
+  "weather_summary": {
+    "2024-04-13": {
+      "min_temp": 30,
+      "max_temp": 38,
+      "avg_wind": 3.5,
+      "solar_potential_hours": 12
+    },
+    "2024-04-14": {
+      "min_temp": 31,
+      "max_temp": 39,
+      "avg_wind": 3.0,
+      "solar_potential_hours": 11
+    },
+    "2024-04-15": {
+      "min_temp": 32,
+      "max_temp": 40,
+      "avg_wind": 2.5,
+      "solar_potential_hours": 10
+    }
+  },
+  "renewable_metrics": {
+    "average_wind_capacity_factor": 0.15,
+    "wind_deviation_from_normal_pct": -45,
+    "average_solar_capacity_factor_daytime": 0.75,
+    "solar_deviation_from_normal_pct": 10,
+    "periods_with_low_wind": 8
+  },
+  "eia_realtime_data": {
+    "current": {
+      "timestamp_iso": "2024-04-13T14:00:00",
+      "demand_mw": 65000,
+      "wind_mw": 5000,
+      "solar_mw": 12000
+    }
+  },
+  "price_risk": {
+    "price_spike_probability": 0.65,
+    "risk_level": "HIGH",
+    "risk_factors": [
+      "Low wind generation",
+      "High temperatures",
+      "Peak demand hours"
+    ]
+  },
+  "load_prediction": {
+    "predicted_load_mw": 67985.9733581543,
+    "predicted_load_gw": 67.9859733581543,
+    "timestamp": "2025-04-13T11:17:02.672938",
+    "temperature_c": 35.0,
+    "current_load_mw": 45000.0
+  }
+}
+2025-04-13 11:17:03,572 - INFO - Formatting prompt for Replicate LLM...
+2025-04-13 11:17:03,720 - INFO - HTTP Request: POST https://api.replicate.com/v1/predictions "HTTP/1.1 201 Created"
+2025-04-13 11:17:03,797 - INFO - HTTP Request: GET https://api.replicate.com/v1/models/meta/llama-2-70b-chat/versions/02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3 "HTTP/1.1 200 OK"
+2025-04-13 11:17:04,398 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:04,993 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:05,595 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:06,201 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:06,801 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:07,399 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:08,010 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:08,613 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:09,216 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:09,817 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:10,417 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:11,020 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:11,637 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:12,237 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:12,854 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:13,468 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:14,068 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:14,667 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:15,267 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:15,877 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:16,570 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:17,177 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:17,792 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:18,388 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:18,988 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:19,605 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:20,211 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:20,832 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:21,427 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/m20d1cdwfnrj60cp5ywtczvv18 "HTTP/1.1 200 OK"
+2025-04-13 11:17:21,429 - INFO - 
+Strategy Recommendation:
+ Hedging Strategy Recommendation for ERCOT Market
+
+Based on the provided data, we recommend a hedging strategy that takes into account the predicted load, renewable generation, current market conditions, and weather impact. Our approach aims to mitigate risks associated with price spikes, low wind generation, and high temperatures while maximizing profits.
+
+1. Relationship between Predicted Load and Renewable Generation:
+The predicted load of 67985.9733581543 MW is significantly higher than the current demand of 65000 MW, indicating a potential increase in demand. Moreover, the low wind generation and high temperatures will likely result in a higher reliance on thermal generation, leading to higher prices. To mitigate this risk, we recommend:
+
+a. Increasing thermal generation to meet the expected increase in demand while maintaining a balance with renewable generation.
+b. Utilizing renewable energy certificates (RECs) to ensure a stable supply of renewable energy, taking advantage of the high solar generation.
+2. Current Market Conditions and Price Spike Probability:
+The current market conditions indicate a high probability of price spikes due to low wind generation, high temperatures, and peak demand hours. To mitigate this risk, we recommend:
+
+a. Implementing a stop-loss order at $150/MWh to limit potential losses in case of a price spike.
+b. Utilizing options contracts to cap prices and protect against potential price increases.
+3. Weather Impact on Demand and Renewable Generation:
+The high temperatures will likely result in increased demand, while the low wind speeds will reduce wind generation. To mitigate this risk, we recommend:
+
+a. Monitoring weather forecasts closely to adjust generation and trading strategies accordingly.
+b. Utilizing demand response programs to manage load during peak hours and reduce the strain on the grid.
+4. Specific Hedging Instruments and Timing:
+To execute the recommended hedging strategy, we propose the following instruments and timing:
+
+a. Thermal generation: Increase thermal generation starting from 2024-04-13T14:00:00 to meet the expected increase in demand.
+
+b. Renewable energy certificates (RECs): Purchase RECs starting from 2024-04-13T14:00:00 to ensure a stable supply of renewable energy and take advantage of high solar generation.
+
+c. Stop-loss order: Implement a stop-loss order at $150/MWh starting from 2024-04-13T14:00:00 to limit potential losses in case of a price spike.
+
+d. Options contracts: Purchase options contracts starting from 2024-04-13T14:00:00 to cap prices and protect against potential price increases.
+
+e. Demand response programs: Utilize demand response programs starting from 2024-04-13T14:00:00 to manage load during peak hours and reduce the strain on the grid.
+5. Risk Mitigation Approaches for Identified Scenarios:
+
+a. Scenario 1: Price Spike
+
+i. Activate stop-loss order at $150/MWh to limit potential losses.
+ii. Utilize options contracts to cap prices and protect against potential price increases.
+
+b. Scenario 2: Low Wind Generation
+
+i. Increase thermal generation to meet the expected increase in demand.
+ii. Utilize demand response programs to manage load during peak hours and reduce the strain on the grid.
+
+c. Scenario 3: High Demand
+
+i. Increase thermal generation to meet the expected increase in demand.
+ii. Utilize RECs to ensure a stable supply of renewable energy and take advantage of high solar generation.
+
+By implementing this hedging strategy, we can mitigate risks associated with price spikes, low wind generation, and high temperatures while maximizing profits in the ERCOT market.
+2025-04-13 11:17:21,429 - INFO - Test cases completed.
+2025-04-13 11:24:17,502 - INFO - Starting test cases...
+2025-04-13 11:24:18,610 - INFO - Load prediction successful: {
+  "predicted_load_mw": 70716.54319763184,
+  "predicted_load_gw": 70.71654319763184,
+  "timestamp": "2025-04-13T11:24:17.516564",
+  "temperature_c": 25.0,
+  "current_load_mw": 45000.0
+}
+2025-04-13 11:24:18,610 - INFO - 
+Test Case 1: Low Risk with High Wind
+2025-04-13 11:24:18,610 - INFO - 
+Input Data:
+{
+  "weather_summary": {
+    "2024-04-13": {
+      "min_temp": 15,
+      "max_temp": 25,
+      "avg_wind": 8.5,
+      "solar_potential_hours": 10
+    },
+    "2024-04-14": {
+      "min_temp": 16,
+      "max_temp": 26,
+      "avg_wind": 9.0,
+      "solar_potential_hours": 11
+    },
+    "2024-04-15": {
+      "min_temp": 14,
+      "max_temp": 24,
+      "avg_wind": 8.0,
+      "solar_potential_hours": 10
+    }
+  },
+  "renewable_metrics": {
+    "average_wind_capacity_factor": 0.45,
+    "wind_deviation_from_normal_pct": 15,
+    "average_solar_capacity_factor_daytime": 0.65,
+    "solar_deviation_from_normal_pct": 5,
+    "periods_with_low_wind": 2
+  },
+  "eia_realtime_data": {
+    "current": {
+      "timestamp_iso": "2024-04-13T10:00:00",
+      "demand_mw": 45000,
+      "wind_mw": 15000,
+      "solar_mw": 8000
+    }
+  },
+  "price_risk": {
+    "price_spike_probability": 0.15,
+    "risk_level": "LOW",
+    "risk_factors": [
+      "High renewable generation",
+      "Moderate demand"
+    ]
+  },
+  "load_prediction": {
+    "predicted_load_mw": 70716.54319763184,
+    "predicted_load_gw": 70.71654319763184,
+    "timestamp": "2025-04-13T11:24:17.516564",
+    "temperature_c": 25.0,
+    "current_load_mw": 45000.0
+  }
+}
+2025-04-13 11:24:18,610 - INFO - Formatting prompt for Replicate LLM...
+2025-04-13 11:24:19,138 - INFO - HTTP Request: POST https://api.replicate.com/v1/predictions "HTTP/1.1 201 Created"
+2025-04-13 11:24:19,232 - INFO - HTTP Request: GET https://api.replicate.com/v1/models/meta/llama-2-70b-chat/versions/02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3 "HTTP/1.1 200 OK"
+2025-04-13 11:24:19,839 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:20,440 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:21,049 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:21,668 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:22,280 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:22,893 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:23,500 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:24,108 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:24,716 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:25,318 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:25,918 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:26,520 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:27,126 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:27,729 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:28,344 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:28,953 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:29,561 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:30,166 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:30,776 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:31,600 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:32,272 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:32,898 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:33,526 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:34,135 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:34,744 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:35,351 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:35,952 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:36,560 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:37,163 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:37,768 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:38,382 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:38,996 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:39,614 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:40,219 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:40,824 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:41,434 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:42,039 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:42,643 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:43,242 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:43,851 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:44,455 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:45,060 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:45,666 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:46,266 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:46,873 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:47,488 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:48,101 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:48,723 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:49,343 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:49,961 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:50,566 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:51,166 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:51,772 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:52,395 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:53,005 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:53,611 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:54,222 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:54,823 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:55,440 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:56,060 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:56,663 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:57,272 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:57,879 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:58,477 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:59,096 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:24:59,705 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:00,320 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:00,947 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:01,554 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:02,169 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:02,776 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:03,385 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:03,992 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:04,603 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:05,209 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:05,821 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:06,443 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:07,061 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:07,668 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:08,274 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:08,875 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:09,481 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:10,086 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:10,691 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:11,294 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:11,915 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:12,537 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:13,137 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:13,740 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:14,340 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:14,943 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:15,559 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:16,163 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:16,768 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:17,376 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:17,984 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:18,581 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:19,193 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:19,811 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:20,412 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:21,016 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:21,619 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:22,240 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:22,852 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:23,472 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:24,085 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:24,685 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:25,292 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:25,901 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:26,504 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:27,111 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:27,718 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:28,313 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:28,930 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:29,546 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:30,147 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:30,759 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:31,756 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:32,409 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:33,025 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:33,628 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:34,261 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:34,876 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:35,477 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:36,081 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:36,687 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:37,287 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:37,900 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:38,520 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:39,123 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:39,729 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:40,337 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:40,936 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:41,539 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:42,142 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:42,748 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:43,359 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:43,967 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:44,580 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:45,180 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:45,789 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:46,391 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:47,000 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:47,612 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:48,214 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:48,827 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:49,445 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:50,052 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:50,656 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:51,257 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:51,871 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:52,473 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:53,081 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:53,683 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:54,292 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:54,902 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:55,527 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:56,132 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:56,735 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:57,352 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:57,966 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:58,576 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:59,177 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:25:59,782 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:00,393 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:01,004 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:01,612 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:02,240 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:02,850 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:03,462 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:04,064 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:04,667 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:05,274 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:05,883 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:06,493 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:07,094 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:07,713 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:08,327 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:08,928 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:09,541 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:10,144 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:10,755 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:11,366 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:11,971 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:12,699 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:13,315 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:13,930 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:14,531 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:15,137 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:15,746 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:16,364 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:16,990 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:17,597 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:18,220 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:18,832 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:19,444 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:20,052 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:20,660 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:21,266 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:21,880 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:22,494 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:23,104 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:23,720 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:24,327 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:24,942 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:25,571 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:26,173 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:26,786 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:27,396 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:28,010 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:28,611 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:29,222 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:29,833 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:30,431 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:31,151 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:31,786 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:32,426 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:33,047 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:33,649 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:34,257 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:34,862 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:35,472 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:36,143 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:36,750 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:37,369 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:37,977 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:38,586 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:39,192 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:39,793 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:40,404 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:41,003 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:41,609 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:42,228 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:42,833 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:43,461 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:44,073 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:44,680 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:45,299 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:45,904 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:46,508 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:47,337 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:47,943 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:48,561 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:49,178 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:49,778 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:50,379 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:50,993 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:51,598 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:52,206 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:52,816 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:53,418 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:54,028 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:54,641 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:55,244 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:55,849 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:56,456 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:57,057 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:57,662 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:58,284 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:58,893 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:26:59,498 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:00,110 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:00,730 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:01,338 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:01,941 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:02,696 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:03,300 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:03,903 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:04,514 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:05,125 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:05,729 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:06,337 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:06,937 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:07,548 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:08,152 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:08,779 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:09,388 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:09,999 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:10,612 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:11,213 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:11,826 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:12,439 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:13,041 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:13,676 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:14,290 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:14,905 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:15,512 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:16,272 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:16,905 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:17,512 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:18,113 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:18,724 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:19,332 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:19,940 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:20,542 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:21,178 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:21,778 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:22,386 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:22,988 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:23,594 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:24,203 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:24,819 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:25,423 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:26,017 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:26,646 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:27,259 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:27,869 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:28,473 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:29,085 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:29,695 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:30,567 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:31,288 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:31,958 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:32,582 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:33,194 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:33,799 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:34,401 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:35,029 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:35,630 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:36,230 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:36,841 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:37,455 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:38,058 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:38,671 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:39,277 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:39,875 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:40,491 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:41,111 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:41,733 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:42,347 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:42,962 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:43,563 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:44,161 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:44,762 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:45,382 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:45,988 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:46,603 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:47,229 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:47,837 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:48,488 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:49,130 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:49,735 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:50,344 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:50,953 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:51,569 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:52,184 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:52,793 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:53,400 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:54,012 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:54,621 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:55,220 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:55,821 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:56,425 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:57,033 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:57,641 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:58,260 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:58,857 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:27:59,494 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:00,101 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:00,712 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:01,320 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:01,928 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:02,534 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:03,170 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:03,784 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:04,396 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:05,014 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:05,625 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:06,230 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:06,847 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:07,456 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:08,059 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:08,666 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:09,270 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:09,872 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:10,480 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:11,090 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:11,696 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:12,298 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:12,902 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:13,505 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:14,105 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:14,719 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:15,323 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:15,928 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:16,526 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:17,125 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:17,736 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:18,349 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:18,951 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:19,554 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:20,164 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:20,778 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:21,381 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:21,998 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:22,606 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:23,216 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:23,816 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:24,422 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:25,019 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:25,623 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:26,230 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:26,850 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:27,449 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:28,050 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:28,669 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:29,273 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:29,882 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:30,486 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:32,116 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:32,799 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:33,409 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:34,019 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:34,629 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:35,232 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:35,847 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:36,451 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:37,052 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:37,664 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:38,268 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:38,883 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:39,486 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:40,091 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:40,698 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:41,309 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:41,915 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:42,518 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:43,136 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:43,762 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:44,371 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:44,988 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:45,607 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:46,217 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:46,826 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:47,437 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:48,048 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:48,660 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:49,268 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:49,876 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:50,482 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:51,084 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:51,685 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:52,293 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:52,896 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:53,503 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:54,112 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:54,725 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:55,332 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:55,949 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:56,549 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:57,155 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:57,757 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:58,366 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/sb1jkzv0qsrj00cp5z09yt150g "HTTP/1.1 200 OK"
+2025-04-13 11:28:58,368 - INFO - 
+Strategy Recommendation:
+ HEDGE ACTIONS:
+
+1. Buy 500 MWh of North Hub Peak Options (strike price = $700/MWh, premium = $15/MWh) to hedge against potential price spikes due to high demand and temperature-driven load.
+2. Sell 500 MWh of West Hub Peak Options (strike price = $600/MWh, premium = $10/MWh) to take advantage of the spread between North and West hubs, considering the wind generation impact.
+
+RENEWABLE SWITCH: NO
+
+JUSTIFICATION:
+
+The current market conditions indicate a high probability of temperature-driven demand spikes, as the forecasted temperature is 25°C, and the load forecast confidence is high. Moreover, the price risk assessment suggests a 15% probability of a price spike above $500/MWh. To hedge against these risks, we recommend buying North Hub Peak Options with a strike price of $700/MWh and a premium of $15/MWh. This will allow us to benefit from potential price increases while limiting our exposure to downside risks.
+
+Additionally, we observe a spread between North and West hubs, which can be exploited by selling West Hub Peak Options. This spread is likely due to wind generation impact, as the forecasted wind CF is 0.45, indicating a higher wind generation in the West hub. By selling West Hub Peak Options with a strike price of $600/MWh and a premium of $10/MWh, we can take advantage of this spread and potentially profit from the difference in hub prices.
+
+We do not recommend a renewable switch as the wind deviation is only 15%, which is not significantly below the -25% threshold. Moreover, the price risk is only 15%, which is not high enough to justify a renewable switch.
+
+In summary, our hedging strategy is designed to take advantage of the market conditions, specifically the high demand and temperature-driven load, while also considering the spread between North and West hubs. By buying North Hub Peak Options and selling West Hub Peak Options, we can effectively manage risks and potentially profit from the market conditions.
+2025-04-13 11:28:59,223 - INFO - Load prediction successful: {
+  "predicted_load_mw": 67985.9733581543,
+  "predicted_load_gw": 67.9859733581543,
+  "timestamp": "2025-04-13T11:28:58.408256",
+  "temperature_c": 35.0,
+  "current_load_mw": 45000.0
+}
+2025-04-13 11:28:59,223 - INFO - 
+Test Case 2: High Risk with Low Wind
+2025-04-13 11:28:59,223 - INFO - 
+Input Data:
+{
+  "weather_summary": {
+    "2024-04-13": {
+      "min_temp": 30,
+      "max_temp": 38,
+      "avg_wind": 3.5,
+      "solar_potential_hours": 12
+    },
+    "2024-04-14": {
+      "min_temp": 31,
+      "max_temp": 39,
+      "avg_wind": 3.0,
+      "solar_potential_hours": 11
+    },
+    "2024-04-15": {
+      "min_temp": 32,
+      "max_temp": 40,
+      "avg_wind": 2.5,
+      "solar_potential_hours": 10
+    }
+  },
+  "renewable_metrics": {
+    "average_wind_capacity_factor": 0.15,
+    "wind_deviation_from_normal_pct": -45,
+    "average_solar_capacity_factor_daytime": 0.75,
+    "solar_deviation_from_normal_pct": 10,
+    "periods_with_low_wind": 8
+  },
+  "eia_realtime_data": {
+    "current": {
+      "timestamp_iso": "2024-04-13T14:00:00",
+      "demand_mw": 65000,
+      "wind_mw": 5000,
+      "solar_mw": 12000
+    }
+  },
+  "price_risk": {
+    "price_spike_probability": 0.65,
+    "risk_level": "HIGH",
+    "risk_factors": [
+      "Low wind generation",
+      "High temperatures",
+      "Peak demand hours"
+    ]
+  },
+  "load_prediction": {
+    "predicted_load_mw": 67985.9733581543,
+    "predicted_load_gw": 67.9859733581543,
+    "timestamp": "2025-04-13T11:28:58.408256",
+    "temperature_c": 35.0,
+    "current_load_mw": 45000.0
+  }
+}
+2025-04-13 11:28:59,223 - INFO - Formatting prompt for Replicate LLM...
+2025-04-13 11:28:59,402 - INFO - HTTP Request: POST https://api.replicate.com/v1/predictions "HTTP/1.1 201 Created"
+2025-04-13 11:28:59,487 - INFO - HTTP Request: GET https://api.replicate.com/v1/models/meta/llama-2-70b-chat/versions/02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3 "HTTP/1.1 200 OK"
+2025-04-13 11:29:00,089 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/20km2b581nrj00cp5z28cw20y8 "HTTP/1.1 200 OK"
+2025-04-13 11:29:00,690 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/20km2b581nrj00cp5z28cw20y8 "HTTP/1.1 200 OK"
+2025-04-13 11:29:01,293 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/20km2b581nrj00cp5z28cw20y8 "HTTP/1.1 200 OK"
+2025-04-13 11:29:01,896 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/20km2b581nrj00cp5z28cw20y8 "HTTP/1.1 200 OK"
+2025-04-13 11:29:02,509 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/20km2b581nrj00cp5z28cw20y8 "HTTP/1.1 200 OK"
+2025-04-13 11:29:03,113 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/20km2b581nrj00cp5z28cw20y8 "HTTP/1.1 200 OK"
+2025-04-13 11:29:03,720 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/20km2b581nrj00cp5z28cw20y8 "HTTP/1.1 200 OK"
+2025-04-13 11:29:04,328 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/20km2b581nrj00cp5z28cw20y8 "HTTP/1.1 200 OK"
+2025-04-13 11:29:04,934 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/20km2b581nrj00cp5z28cw20y8 "HTTP/1.1 200 OK"
+2025-04-13 11:29:05,541 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/20km2b581nrj00cp5z28cw20y8 "HTTP/1.1 200 OK"
+2025-04-13 11:29:06,171 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/20km2b581nrj00cp5z28cw20y8 "HTTP/1.1 200 OK"
+2025-04-13 11:29:06,782 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/20km2b581nrj00cp5z28cw20y8 "HTTP/1.1 200 OK"
+2025-04-13 11:29:07,397 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/20km2b581nrj00cp5z28cw20y8 "HTTP/1.1 200 OK"
+2025-04-13 11:29:08,009 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/20km2b581nrj00cp5z28cw20y8 "HTTP/1.1 200 OK"
+2025-04-13 11:29:08,010 - INFO - 
+Strategy Recommendation:
+ HEDGE ACTIONS:
+
+1. Buy 500 MWh of North Hub Peak Options (strike price = $500/MWh, premium = $15/MWh) to hedge against potential price spikes due to high demand and low wind generation. Ticker symbol: NHPK24APR500.
+2. Sell 500 MWh of West Hub Peak Options (strike price = $500/MWh, premium = $10/MWh) to take advantage of the spread between North and West hubs, as wind generation is expected to be low in the West region. Ticker symbol: WHPK24APR500.
+
+RENEWABLE SWITCH: YES
+
+JUSTIFICATION:
+
+The weather forecast indicates high temperatures and low wind speeds, leading to a high demand for power and a decrease in wind generation. This combination of factors increases the likelihood of price spikes, especially during peak hours. To hedge against these spikes, we recommend buying North Hub Peak Options with a strike price of $500/MWh and a premium of $15/MWh. This will allow us to benefit from potential price increases while limiting our exposure to potential price decreases.
+
+Additionally, we observe a spread between North and West hubs, with the West hub having lower wind generation. This spread is expected to increase due to the weather conditions, making it profitable to sell West Hub Peak Options with a strike price of $500/MWh and a premium of $10/MWh.
+
+Finally, our renewable switch indicator suggests that it is beneficial to switch to a renewable energy source, as the wind deviation is below -25% and the price risk is above 60%. This further supports our decision to hedge with North Hub Peak Options.
+
+Ticker symbols: NHPK24APR500, WHPK24APR500.
+2025-04-13 11:29:08,010 - INFO - Test cases completed.
+2025-04-13 11:29:28,176 - INFO - Starting test cases...
+2025-04-13 11:29:29,070 - INFO - Load prediction successful: {
+  "predicted_load_mw": 70716.54319763184,
+  "predicted_load_gw": 70.71654319763184,
+  "timestamp": "2025-04-13T11:29:28.197113",
+  "temperature_c": 25.0,
+  "current_load_mw": 45000.0
+}
+2025-04-13 11:29:29,070 - INFO - 
+Test Case 1: Low Risk with High Wind
+2025-04-13 11:29:29,070 - INFO - 
+Input Data:
+{
+  "weather_summary": {
+    "2024-04-13": {
+      "min_temp": 15,
+      "max_temp": 25,
+      "avg_wind": 8.5,
+      "solar_potential_hours": 10
+    },
+    "2024-04-14": {
+      "min_temp": 16,
+      "max_temp": 26,
+      "avg_wind": 9.0,
+      "solar_potential_hours": 11
+    },
+    "2024-04-15": {
+      "min_temp": 14,
+      "max_temp": 24,
+      "avg_wind": 8.0,
+      "solar_potential_hours": 10
+    }
+  },
+  "renewable_metrics": {
+    "average_wind_capacity_factor": 0.45,
+    "wind_deviation_from_normal_pct": 15,
+    "average_solar_capacity_factor_daytime": 0.65,
+    "solar_deviation_from_normal_pct": 5,
+    "periods_with_low_wind": 2
+  },
+  "eia_realtime_data": {
+    "current": {
+      "timestamp_iso": "2024-04-13T10:00:00",
+      "demand_mw": 45000,
+      "wind_mw": 15000,
+      "solar_mw": 8000
+    }
+  },
+  "price_risk": {
+    "price_spike_probability": 0.15,
+    "risk_level": "LOW",
+    "risk_factors": [
+      "High renewable generation",
+      "Moderate demand"
+    ]
+  },
+  "load_prediction": {
+    "predicted_load_mw": 70716.54319763184,
+    "predicted_load_gw": 70.71654319763184,
+    "timestamp": "2025-04-13T11:29:28.197113",
+    "temperature_c": 25.0,
+    "current_load_mw": 45000.0
+  }
+}
+2025-04-13 11:29:29,070 - INFO - Formatting prompt for Replicate LLM...
+2025-04-13 11:29:29,304 - INFO - HTTP Request: POST https://api.replicate.com/v1/predictions "HTTP/1.1 201 Created"
+2025-04-13 11:29:29,378 - INFO - HTTP Request: GET https://api.replicate.com/v1/models/meta/llama-2-70b-chat/versions/02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3 "HTTP/1.1 200 OK"
+2025-04-13 11:29:29,993 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:30,595 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:31,200 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:31,831 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:32,450 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:33,050 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:33,658 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:34,262 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:34,858 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:35,459 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:36,064 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:36,662 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:37,283 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:37,893 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:38,498 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:39,089 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:39,692 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:40,294 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:40,900 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:41,493 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:42,093 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/w1qt380wz1rj40cp5z2vy59x00 "HTTP/1.1 200 OK"
+2025-04-13 11:29:42,094 - INFO - 
+Strategy Recommendation:
+ HEDGE ACTIONS:
+
+1. Buy 500 MWh of North Hub Peak Options (strike price = $700/MWh, premium = $15/MWh) to hedge against potential price spikes due to high demand and low wind generation. Ticker symbol: NHPEAK.
+2. Sell 500 MWh of West Hub Peak Options (strike price = $600/MWh, premium = $10/MWh) to take advantage of the spread between North and West hubs, as wind generation is expected to be lower in the West hub. Ticker symbol: WHPEAK.
+
+RENEWABLE SWITCH: NO
+
+JUSTIFICATION:
+The wind deviation is currently 15%, which is within the acceptable range. The price risk is also 15%, which is relatively low. Therefore, it is not necessary to switch to a renewable energy source.
+
+ERCOT LOAD CONDITIONS: MODERATE
+
+The current system load is 45000 MW, which is within the moderate load range. The predicted peak load is 70716.54319763184 MW, which is also within the moderate load range. Therefore, the ERCOT load conditions are moderate.
+
+The hedge actions are based on the following market conditions:
+
+* Natural Gas (NG.FUT): The current price is $6.50/MMBtu, which is relatively low. However, the power price is expected to increase due to the high demand and low wind generation.
+* Power Hub Spreads: The North vs Houston spread is currently $10/MWh, which indicates that the North hub is experiencing higher demand than the Houston hub. The West vs Other Hubs spread is $5/MWh, which suggests that wind generation is lower in the West hub.
+* Weather Derivatives: The CDD (Cooling) value is 20, which indicates that AC demand is high. The HDD (Heating) value is 10, which suggests that heating demand is low.
+* Options Strategy: The ATM Calls/Puts have a strike price of $700/MWh, which is the current North Hub Peak price. The OTM Calls have a strike price of $750/MWh, which is $50 higher than the current North Hub Peak price. The premium vs strike spread indicates that the market expects a potential price spike.
+
+Based on these market conditions, buying North Hub Peak Options (NHPEAK) and selling West Hub Peak Options (WHPEAK) can help to hedge against potential price spikes due to high demand and low wind generation. The North hub is expected to experience higher demand than the West hub, which makes it a good idea to buy North Hub Peak Options. Additionally, the spread between North and West hubs is relatively high, which makes it profitable to sell West Hub Peak Options.
+2025-04-13 11:29:42,811 - INFO - Load prediction successful: {
+  "predicted_load_mw": 67985.9733581543,
+  "predicted_load_gw": 67.9859733581543,
+  "timestamp": "2025-04-13T11:29:42.101702",
+  "temperature_c": 35.0,
+  "current_load_mw": 45000.0
+}
+2025-04-13 11:29:42,811 - INFO - 
+Test Case 2: High Risk with Low Wind
+2025-04-13 11:29:42,811 - INFO - 
+Input Data:
+{
+  "weather_summary": {
+    "2024-04-13": {
+      "min_temp": 30,
+      "max_temp": 38,
+      "avg_wind": 3.5,
+      "solar_potential_hours": 12
+    },
+    "2024-04-14": {
+      "min_temp": 31,
+      "max_temp": 39,
+      "avg_wind": 3.0,
+      "solar_potential_hours": 11
+    },
+    "2024-04-15": {
+      "min_temp": 32,
+      "max_temp": 40,
+      "avg_wind": 2.5,
+      "solar_potential_hours": 10
+    }
+  },
+  "renewable_metrics": {
+    "average_wind_capacity_factor": 0.15,
+    "wind_deviation_from_normal_pct": -45,
+    "average_solar_capacity_factor_daytime": 0.75,
+    "solar_deviation_from_normal_pct": 10,
+    "periods_with_low_wind": 8
+  },
+  "eia_realtime_data": {
+    "current": {
+      "timestamp_iso": "2024-04-13T14:00:00",
+      "demand_mw": 65000,
+      "wind_mw": 5000,
+      "solar_mw": 12000
+    }
+  },
+  "price_risk": {
+    "price_spike_probability": 0.65,
+    "risk_level": "HIGH",
+    "risk_factors": [
+      "Low wind generation",
+      "High temperatures",
+      "Peak demand hours"
+    ]
+  },
+  "load_prediction": {
+    "predicted_load_mw": 67985.9733581543,
+    "predicted_load_gw": 67.9859733581543,
+    "timestamp": "2025-04-13T11:29:42.101702",
+    "temperature_c": 35.0,
+    "current_load_mw": 45000.0
+  }
+}
+2025-04-13 11:29:42,811 - INFO - Formatting prompt for Replicate LLM...
+2025-04-13 11:29:42,940 - INFO - HTTP Request: POST https://api.replicate.com/v1/predictions "HTTP/1.1 201 Created"
+2025-04-13 11:29:43,006 - INFO - HTTP Request: GET https://api.replicate.com/v1/models/meta/llama-2-70b-chat/versions/02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3 "HTTP/1.1 200 OK"
+2025-04-13 11:29:43,613 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zaev3p2j81rj60cp5z2s2r4dqg "HTTP/1.1 200 OK"
+2025-04-13 11:29:44,204 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zaev3p2j81rj60cp5z2s2r4dqg "HTTP/1.1 200 OK"
+2025-04-13 11:29:44,801 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zaev3p2j81rj60cp5z2s2r4dqg "HTTP/1.1 200 OK"
+2025-04-13 11:29:45,588 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zaev3p2j81rj60cp5z2s2r4dqg "HTTP/1.1 200 OK"
+2025-04-13 11:29:46,186 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zaev3p2j81rj60cp5z2s2r4dqg "HTTP/1.1 200 OK"
+2025-04-13 11:29:46,781 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zaev3p2j81rj60cp5z2s2r4dqg "HTTP/1.1 200 OK"
+2025-04-13 11:29:47,375 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zaev3p2j81rj60cp5z2s2r4dqg "HTTP/1.1 200 OK"
+2025-04-13 11:29:47,968 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zaev3p2j81rj60cp5z2s2r4dqg "HTTP/1.1 200 OK"
+2025-04-13 11:29:48,571 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zaev3p2j81rj60cp5z2s2r4dqg "HTTP/1.1 200 OK"
+2025-04-13 11:29:49,174 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zaev3p2j81rj60cp5z2s2r4dqg "HTTP/1.1 200 OK"
+2025-04-13 11:29:49,773 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zaev3p2j81rj60cp5z2s2r4dqg "HTTP/1.1 200 OK"
+2025-04-13 11:29:50,366 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zaev3p2j81rj60cp5z2s2r4dqg "HTTP/1.1 200 OK"
+2025-04-13 11:29:50,956 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zaev3p2j81rj60cp5z2s2r4dqg "HTTP/1.1 200 OK"
+2025-04-13 11:29:51,567 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zaev3p2j81rj60cp5z2s2r4dqg "HTTP/1.1 200 OK"
+2025-04-13 11:29:52,188 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zaev3p2j81rj60cp5z2s2r4dqg "HTTP/1.1 200 OK"
+2025-04-13 11:29:52,795 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zaev3p2j81rj60cp5z2s2r4dqg "HTTP/1.1 200 OK"
+2025-04-13 11:29:53,399 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zaev3p2j81rj60cp5z2s2r4dqg "HTTP/1.1 200 OK"
+2025-04-13 11:29:53,402 - INFO - 
+Strategy Recommendation:
+ HEDGE ACTIONS:
+
+1. Buy 500 MWh of North Hub Peak Options (strike price = current North Hub Peak price: $500/MWh) to hedge against potential price spikes due to high demand and low wind generation. Premium: $15/MWh.
+2. Sell 500 MWh of West Hub Peak Options (strike price = current West Hub Peak price: $400/MWh) to take advantage of the spread between North and West hubs, considering the wind generation impact. Premium: $10/MWh.
+
+RENEWABLE SWITCH: NO
+
+JUSTIFICATION:
+The wind deviation is currently at -45%, which is significantly lower than the average wind CF of 0.15. This indicates that wind generation is below average, which could lead to higher power prices. Moreover, the price risk is high (65%), suggesting that there is a significant probability of price spikes. Therefore, buying North Hub Peak Options (strike price = $500/MWh) will help to hedge against potential price increases.
+
+Additionally, selling West Hub Peak Options (strike price = $400/MWh) will take advantage of the spread between North and West hubs, considering the wind generation impact. The West hub has a higher wind generation share compared to the North hub, which means that the West hub price is less sensitive to wind generation variations. As a result, the West hub price is likely to be lower than the North hub price, making the spread between the two hubs more attractive.
+
+ERCOT LOAD CONDITIONS: MODERATE
+
+The system-wide load is currently at 65000 MW, which is above the 65 GW threshold for high stress. However, the load ramp is only 10 GW/3hr, which suggests that the load is not increasing rapidly. Moreover, the morning ramp (6-9 am) and evening peak (4-7 pm) are not extreme, and the weekend load is typically 80% of the weekday load. Therefore, the load conditions are moderate, indicating that there is no need to take extreme actions to manage the load.
+
+The reserve margin is not a concern currently, as it is not below 10%. Therefore, there is no need to take action to manage the reserve margin.
+2025-04-13 11:29:53,402 - INFO - Test cases completed.
+2025-04-13 11:46:02,037 - INFO - Load prediction successful: {
+  "predicted_load_mw": 70466.71867370605,
+  "predicted_load_gw": 70.46671867370605,
+  "timestamp": "2025-04-13T11:46:00.503809",
+  "temperature_c": 25.889999999999986,
+  "current_load_mw": 45000.0
+}
+2025-04-13 11:46:02,048 - INFO - Formatting prompt for Replicate LLM...
+2025-04-13 11:46:02,299 - INFO - HTTP Request: POST https://api.replicate.com/v1/predictions "HTTP/1.1 201 Created"
+2025-04-13 11:46:02,387 - INFO - HTTP Request: GET https://api.replicate.com/v1/models/meta/llama-2-70b-chat/versions/02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3 "HTTP/1.1 200 OK"
+2025-04-13 11:46:02,987 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zfdey0a3nsrj00cp5zaa5dh3mg "HTTP/1.1 200 OK"
+2025-04-13 11:46:03,583 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zfdey0a3nsrj00cp5zaa5dh3mg "HTTP/1.1 200 OK"
+2025-04-13 11:46:04,178 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zfdey0a3nsrj00cp5zaa5dh3mg "HTTP/1.1 200 OK"
+2025-04-13 11:46:04,771 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zfdey0a3nsrj00cp5zaa5dh3mg "HTTP/1.1 200 OK"
+2025-04-13 11:46:05,368 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zfdey0a3nsrj00cp5zaa5dh3mg "HTTP/1.1 200 OK"
+2025-04-13 11:46:05,966 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zfdey0a3nsrj00cp5zaa5dh3mg "HTTP/1.1 200 OK"
+2025-04-13 11:46:06,560 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zfdey0a3nsrj00cp5zaa5dh3mg "HTTP/1.1 200 OK"
+2025-04-13 11:46:07,153 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zfdey0a3nsrj00cp5zaa5dh3mg "HTTP/1.1 200 OK"
+2025-04-13 11:46:07,747 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zfdey0a3nsrj00cp5zaa5dh3mg "HTTP/1.1 200 OK"
+2025-04-13 11:46:08,350 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zfdey0a3nsrj00cp5zaa5dh3mg "HTTP/1.1 200 OK"
+2025-04-13 11:46:08,943 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zfdey0a3nsrj00cp5zaa5dh3mg "HTTP/1.1 200 OK"
+2025-04-13 11:46:09,588 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zfdey0a3nsrj00cp5zaa5dh3mg "HTTP/1.1 200 OK"
+2025-04-13 11:46:10,182 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zfdey0a3nsrj00cp5zaa5dh3mg "HTTP/1.1 200 OK"
+2025-04-13 11:46:10,783 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zfdey0a3nsrj00cp5zaa5dh3mg "HTTP/1.1 200 OK"
+2025-04-13 11:46:11,377 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zfdey0a3nsrj00cp5zaa5dh3mg "HTTP/1.1 200 OK"
+2025-04-13 11:46:12,017 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/zfdey0a3nsrj00cp5zaa5dh3mg "HTTP/1.1 200 OK"
+2025-04-13 11:48:29,071 - INFO - Load prediction successful: {
+  "predicted_load_mw": 70466.71867370605,
+  "predicted_load_gw": 70.46671867370605,
+  "timestamp": "2025-04-13T11:48:28.259444",
+  "temperature_c": 25.889999999999986,
+  "current_load_mw": 45000.0
+}
+2025-04-13 11:48:29,080 - INFO - Formatting prompt for Replicate LLM...
+2025-04-13 11:48:29,361 - INFO - HTTP Request: POST https://api.replicate.com/v1/predictions "HTTP/1.1 201 Created"
+2025-04-13 11:48:29,434 - INFO - HTTP Request: GET https://api.replicate.com/v1/models/meta/llama-2-70b-chat/versions/02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3 "HTTP/1.1 200 OK"
+2025-04-13 11:48:30,039 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/ar993sw239rj20cp5zbbwf9far "HTTP/1.1 200 OK"
+2025-04-13 11:48:30,649 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/ar993sw239rj20cp5zbbwf9far "HTTP/1.1 200 OK"
+2025-04-13 11:48:31,291 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/ar993sw239rj20cp5zbbwf9far "HTTP/1.1 200 OK"
+2025-04-13 11:48:31,951 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/ar993sw239rj20cp5zbbwf9far "HTTP/1.1 200 OK"
+2025-04-13 11:48:32,546 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/ar993sw239rj20cp5zbbwf9far "HTTP/1.1 200 OK"
+2025-04-13 11:48:33,169 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/ar993sw239rj20cp5zbbwf9far "HTTP/1.1 200 OK"
+2025-04-13 11:48:33,795 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/ar993sw239rj20cp5zbbwf9far "HTTP/1.1 200 OK"
+2025-04-13 11:48:34,402 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/ar993sw239rj20cp5zbbwf9far "HTTP/1.1 200 OK"
+2025-04-13 11:48:35,031 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/ar993sw239rj20cp5zbbwf9far "HTTP/1.1 200 OK"
+2025-04-13 11:48:35,633 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/ar993sw239rj20cp5zbbwf9far "HTTP/1.1 200 OK"
+2025-04-13 11:48:36,251 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/ar993sw239rj20cp5zbbwf9far "HTTP/1.1 200 OK"
+2025-04-13 11:48:36,879 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/ar993sw239rj20cp5zbbwf9far "HTTP/1.1 200 OK"
+2025-04-13 11:48:37,476 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/ar993sw239rj20cp5zbbwf9far "HTTP/1.1 200 OK"
+2025-04-13 11:48:38,096 - INFO - HTTP Request: GET https://api.replicate.com/v1/predictions/ar993sw239rj20cp5zbbwf9far "HTTP/1.1 200 OK"
